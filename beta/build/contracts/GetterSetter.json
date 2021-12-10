@@ -1,0 +1,401 @@
+{
+  "contractName": "GetterSetter",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "value",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "_value",
+          "type": "bytes32"
+        }
+      ],
+      "name": "setValue",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_value\",\"type\":\"bytes32\"}],\"name\":\"setValue\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"value\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/E/horizon-exchange/PhoenixOracle/contracts/GetterSetter.sol\":\"GetterSetter\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/E/horizon-exchange/PhoenixOracle/contracts/GetterSetter.sol\":{\"keccak256\":\"0x2b12740263c12c422e328eaf8e0d82c81926f8bc0278e396c02f31a82b8ba5df\",\"urls\":[\"bzz-raw://aecc06fb5089949b305d5445e271a7bd255e95a361e046ff536cefafec3bd03b\",\"dweb:/ipfs/QmdU6rBhCU77TsPBovNHKhNfoeCGeC5vcYWVafPNfq6BXK\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b5060c38061001f6000396000f3fe6080604052348015600f57600080fd5b506004361060325760003560e01c80633fa4f24514603757806358825b10146053575b600080fd5b603d607e565b6040518082815260200191505060405180910390f35b607c60048036036020811015606757600080fd5b81019080803590602001909291905050506084565b005b60005481565b806000819055505056fea265627a7a723158204aae1e657e96d25d200d53bcdd796b298388c0a01df2b99e64e90c6777cc575164736f6c63430005100032",
+  "deployedBytecode": "0x6080604052348015600f57600080fd5b506004361060325760003560e01c80633fa4f24514603757806358825b10146053575b600080fd5b603d607e565b6040518082815260200191505060405180910390f35b607c60048036036020811015606757600080fd5b81019080803590602001909291905050506084565b005b60005481565b806000819055505056fea265627a7a723158204aae1e657e96d25d200d53bcdd796b298388c0a01df2b99e64e90c6777cc575164736f6c63430005100032",
+  "sourceMap": "27:135:0:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;27:135:0;;;;;;;",
+  "deployedSourceMap": "27:135:0:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;27:135:0;;;;;;;;;;;;;;;;;;;;;;;;56:20;;;:::i;:::-;;;;;;;;;;;;;;;;;;;85:74;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;85:74:0;;;;;;;;;;;;;;;;;:::i;:::-;;56:20;;;;:::o;85:74::-;145:6;137:5;:14;;;;85:74;:::o",
+  "source": "pragma solidity ^0.5.0;\r\n\r\ncontract GetterSetter {\r\n    bytes32 public value;\r\n\r\n    function setValue(bytes32 _value) public {\r\n        value = _value;\r\n    }\r\n}\r\n",
+  "sourcePath": "E:/horizon-exchange/PhoenixOracle/contracts/GetterSetter.sol",
+  "ast": {
+    "absolutePath": "/E/horizon-exchange/PhoenixOracle/contracts/GetterSetter.sol",
+    "exportedSymbols": {
+      "GetterSetter": [
+        14
+      ]
+    },
+    "id": 15,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:0"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 14,
+        "linearizedBaseContracts": [
+          14
+        ],
+        "name": "GetterSetter",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 3,
+            "name": "value",
+            "nodeType": "VariableDeclaration",
+            "scope": 14,
+            "src": "56:20:0",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "56:7:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 12,
+              "nodeType": "Block",
+              "src": "126:33:0",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 10,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 8,
+                      "name": "value",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 3,
+                      "src": "137:5:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes32",
+                        "typeString": "bytes32"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 9,
+                      "name": "_value",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 5,
+                      "src": "145:6:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes32",
+                        "typeString": "bytes32"
+                      }
+                    },
+                    "src": "137:14:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "id": 11,
+                  "nodeType": "ExpressionStatement",
+                  "src": "137:14:0"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 13,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setValue",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 6,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5,
+                  "name": "_value",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13,
+                  "src": "103:14:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 4,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "103:7:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "102:16:0"
+            },
+            "returnParameters": {
+              "id": 7,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "126:0:0"
+            },
+            "scope": 14,
+            "src": "85:74:0",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 15,
+        "src": "27:135:0"
+      }
+    ],
+    "src": "0:164:0"
+  },
+  "legacyAST": {
+    "absolutePath": "/E/horizon-exchange/PhoenixOracle/contracts/GetterSetter.sol",
+    "exportedSymbols": {
+      "GetterSetter": [
+        14
+      ]
+    },
+    "id": 15,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:0"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 14,
+        "linearizedBaseContracts": [
+          14
+        ],
+        "name": "GetterSetter",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 3,
+            "name": "value",
+            "nodeType": "VariableDeclaration",
+            "scope": 14,
+            "src": "56:20:0",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 2,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "56:7:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 12,
+              "nodeType": "Block",
+              "src": "126:33:0",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 10,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 8,
+                      "name": "value",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 3,
+                      "src": "137:5:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes32",
+                        "typeString": "bytes32"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 9,
+                      "name": "_value",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 5,
+                      "src": "145:6:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes32",
+                        "typeString": "bytes32"
+                      }
+                    },
+                    "src": "137:14:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "id": 11,
+                  "nodeType": "ExpressionStatement",
+                  "src": "137:14:0"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 13,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setValue",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 6,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5,
+                  "name": "_value",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13,
+                  "src": "103:14:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 4,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "103:7:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "102:16:0"
+            },
+            "returnParameters": {
+              "id": 7,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "126:0:0"
+            },
+            "scope": 14,
+            "src": "85:74:0",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 15,
+        "src": "27:135:0"
+      }
+    ],
+    "src": "0:164:0"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.16+commit.9c3226ce.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.3.2",
+  "updatedAt": "2021-02-02T03:35:35.559Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}
