@@ -1,0 +1,4 @@
+{
+  "initiators": [{ "type": "cron", "schedule": "* * * * *" }],
+  "tasks": [{ "type": "NoOp" }]
+}

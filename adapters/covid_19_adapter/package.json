@@ -1,0 +1,35 @@
+{
+  "name": "covid19",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest",
+    "start:cache": "tsc && node cache/dist/cache/index.js"
+  },
+  "dependencies": {
+    "@zeit/fetch-retry": "^5.0.1",
+    "chrome-aws-lambda": "^2.1.1",
+    "csv-parse": "^4.16.0",
+    "date-fns": "^2.23.0",
+    "isomorphic-unfetch": "^3.1.0",
+    "pbf": "^3.2.1",
+    "puppeteer-core": "^2.1.1",
+    "qs": "^6.10.1",
+    "sharp": "^0.26.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.8",
+    "@babel/preset-env": "^7.14.9",
+    "@babel/preset-typescript": "^7.14.5",
+    "@now/node": "^1.8.5",
+    "@types/jest": "^26.0.24",
+    "@types/qs": "^6.9.7",
+    "all-contributors-cli": "^6.20.0",
+    "babel-jest": "^27.0.6",
+    "jest": "^27.0.6",
+    "objects-to-csv": "^1.3.6",
+    "puppeteer": "^10.1.0",
+    "typescript": "^4.3.5"
+  }
+}

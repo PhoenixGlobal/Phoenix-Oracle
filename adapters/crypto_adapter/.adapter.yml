@@ -1,0 +1,17 @@
+name: CryptoCompare External Adapter
+description: Adapter to connect the CryptoCompare API to oracle nodes
+node_identifier: cryptocompare-ea
+platforms:
+  - AWS Lambda
+  - GCP Functions
+  - Docker
+data_sources:
+  - name: CryptoCompare
+    url: https://www.cryptocompare.com/
+parameters:
+  - endpoint
+  - fsyms
+  - fsym
+  - tsyms
+  - tsym
+  - exchange

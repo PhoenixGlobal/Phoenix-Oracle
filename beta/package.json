@@ -1,0 +1,34 @@
+{
+  "name": "phoenixoracle",
+  "version": "1.0.0",
+  "description": "contract test module",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PhoenixGlobal/PhoenixOracle.git"
+  },
+  "keywords": [
+    "truffle"
+  ],
+  "author": "wufang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PhoenixGlobal/PhoenixOracle/issues"
+  },
+  "homepage": "https://github.com/PhoenixGlobal/PhoenixOracle#readme",
+  "dependencies": {
+    "bignumber.js": "^9.0.1",
+    "ethjs": "^0.4.0",
+    "moment": "^2.29.1",
+    "truffle-contract": "^4.0.31"
+  },
+  "devDependencies": {
+    "mocha": "^8.2.1"
+  }
+}

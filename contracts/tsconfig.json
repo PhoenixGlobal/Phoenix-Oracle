@@ -1,0 +1,7 @@
+{
+  "extends": "../build/tsconfig.cjs.json",
+  "compilerOptions": {
+    "noEmit": true
+  },
+  "exclude": ["node_modules"]
+}

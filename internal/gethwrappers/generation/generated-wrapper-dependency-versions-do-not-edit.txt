@@ -1,0 +1,13 @@
+GETH_VERSION: 1.10.8
+consumer_wrapper: ../../contracts/solc/v0.7/Consumer.abi ../../contracts/solc/v0.7/Consumer.bin 3c2c087a8437e0feec04e677adf73e3c2ed013fab5d8255cd999c4a2a0a1cf7d
+flags_wrapper: ../../contracts/solc/v0.6/Flags.abi ../../contracts/solc/v0.6/Flags.bin 2034d1b562ca37a63068851915e3703980276e8d5f7db6db8a3351a49d69fc4a
+flux_aggregator_wrapper: ../../contracts/solc/v0.6/FluxAggregator.abi ../../contracts/solc/v0.6/FluxAggregator.bin 0f5062b53d4a25fc2cdda6f8a417eb7435e8bc367505a8560369fd935a792fe9
+multiwordconsumer_wrapper: ../../contracts/solc/v0.7/MultiWordConsumer.abi ../../contracts/solc/v0.7/MultiWordConsumer.bin aa60c9a16323a3192ec29292c2d1267d06d505329c43e6f6c7bb8b2d971cb8c7
+offchain_aggregator_wrapper: OffchainAggregator/OffchainAggregator.abi - 85086e230f161b03374836021777b1963f551a7f51a89cc7a293c6d3b547f273
+operator_wrapper: ../../contracts/solc/v0.7/Operator.abi ../../contracts/solc/v0.7/Operator.bin 7666c4b1bc5b74d7eb75c0f5826eb91507146e6d9ff637b8c2944ad7437146f5
+oracle_wrapper: ../../contracts/solc/v0.6/Oracle.abi ../../contracts/solc/v0.6/Oracle.bin 83a18bfcdca9e3666e42487fc600823ebf87abb9d904e882be6acabef366b30e
+solidity_vrf_consumer_interface: ../../contracts/solc/v0.6/VRFConsumer.abi ../../contracts/solc/v0.6/VRFConsumer.bin 322d99134c57cfda19f9f480e7c4f9696725eaddf335173809b110c2582368ae
+solidity_vrf_coordinator_interface: ../../contracts/solc/v0.6/VRFCoordinator.abi ../../contracts/solc/v0.6/VRFCoordinator.bin 13a57f7f1430ced1f74873ebc4bf76128743df0012ff77a4dcafe39a3da345a7
+vrf_consumer_v2: ../../contracts/solc/v0.8/VRFConsumerV2.abi ../../contracts/solc/v0.8/VRFConsumerV2.bin 61e3f7ff828e291fd2de196027c783e73af0f915ae29c19a599cb0b838b87745
+vrf_coordinator_v2: ../../contracts/solc/v0.8/VRFCoordinatorV2.abi ../../contracts/solc/v0.8/VRFCoordinatorV2.bin d7571ff87a82c75dfea92b457776d109ce76fb76af92bfa78317d76db1735b7d
+vrf_malicious_consumer_v2: ../../contracts/solc/v0.8/VRFMaliciousConsumerV2.abi ../../contracts/solc/v0.8/VRFMaliciousConsumerV2.bin 160ae7ac818ef1ed94c8912d2d03e85d9eddd7ff67c9959000fb691ebffa9f46
