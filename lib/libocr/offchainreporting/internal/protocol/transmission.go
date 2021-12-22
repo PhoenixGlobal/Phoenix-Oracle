@@ -6,13 +6,13 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/pkg/errors"
 	"PhoenixOracle/lib/libocr/offchainreporting/internal/config"
 	"PhoenixOracle/lib/libocr/offchainreporting/internal/protocol/observation"
 	"PhoenixOracle/lib/libocr/offchainreporting/loghelper"
 	"PhoenixOracle/lib/libocr/offchainreporting/types"
 	"PhoenixOracle/lib/libocr/permutation"
 	"PhoenixOracle/lib/libocr/subprocesses"
+	"github.com/pkg/errors"
 	"golang.org/x/crypto/sha3"
 )
 
@@ -79,9 +79,13 @@ func (t *transmissionState) run() {
 	for {
 		select {
 		case ev := <-t.chReportGenerationToTransmission:
-			ev.processTransmission(t)
+			if t.shouldRun(){
+				ev.processTransmission(t)
+			}
 		case <-t.tTransmit:
-			t.eventTTransmitTimeout()
+			if t.shouldRun(){
+				t.eventTTransmitTimeout()
+			}
 		case <-chDone:
 		}
 
@@ -439,4 +443,32 @@ func (t *transmissionState) transmitDelay(epoch uint32, round uint8) *time.Durat
 		}
 	}
 	return nil
+}
+
+//judge whether the OracleID is in newIndexes or not.If not,it shouldn't run.
+func (t *transmissionState) shouldRun() bool {
+	var resultNewIndexes struct {
+		newIndexes []int
+		err          error
+	}
+	ok := t.subprocesses.BlockForAtMost(t.ctx, t.localConfig.BlockchainTimeout,
+		func(ctx context.Context) {
+			resultNewIndexes.newIndexes, resultNewIndexes.err =
+				t.transmitter.LatestNewIndexes(
+					ctx,
+					t.config.DeltaC,
+				)
+		},
+	)
+	if !ok {
+		t.logger.Error("transmissionState shouldRun: blockchain interaction timed out, returning true", types.LogFields{
+			"latestEpochRound":  t.latestEpochRound,
+			"timeout":           t.localConfig.BlockchainTimeout,
+		})
+		return true
+	}
+	if IsExist(resultNewIndexes.newIndexes,int(t.id)){
+		return true
+	}
+	return false
 }

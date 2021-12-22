@@ -30,7 +30,7 @@ var (
 )
 
 var OffchainAggregatorMetaData = &bind.MetaData{
-	ABI: "[{\"inputs\":[{\"internalType\":\"uint32\",\"name\":\"_maximumGasPrice\",\"type\":\"uint32\"},{\"internalType\":\"uint32\",\"name\":\"_reasonableGasPrice\",\"type\":\"uint32\"},{\"internalType\":\"uint32\",\"name\":\"_microPhbPerEth\",\"type\":\"uint32\"},{\"internalType\":\"uint32\",\"name\":\"_phbGweiPerObservation\",\"type\":\"uint32\"},{\"internalType\":\"uint32\",\"name\":\"_phbGweiPerTransmission\",\"type\":\"uint32\"},{\"internalType\":\"contractPhbTokenInterface\",\"name\":\"_phb\",\"type\":\"address\"},{\"internalType\":\"int192\",\"name\":\"_minAnswer\",\"type\":\"int192\"},{\"internalType\":\"int192\",\"name\":\"_maxAnswer\",\"type\":\"int192\"},{\"internalType\":\"contractAccessControllerInterface\",\"name\":\"_billingAccessController\",\"type\":\"address\"},{\"internalType\":\"contractAccessControllerInterface\",\"name\":\"_requesterAccessController\",\"type\":\"address\"},{\"internalType\":\"uint8\",\"name\":\"_decimals\",\"type\":\"uint8\"},{\"internalType\":\"string\",\"name\":\"description\",\"type\":\"string\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"}],\"name\":\"AddedAccess\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"int256\",\"name\":\"current\",\"type\":\"int256\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"roundId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"updatedAt\",\"type\":\"uint256\"}],\"name\":\"AnswerUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"contractAccessControllerInterface\",\"name\":\"old\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"contractAccessControllerInterface\",\"name\":\"current\",\"type\":\"address\"}],\"name\":\"BillingAccessControllerSet\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"maximumGasPrice\",\"type\":\"uint32\"},{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"reasonableGasPrice\",\"type\":\"uint32\"},{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"microPhbPerEth\",\"type\":\"uint32\"},{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"phbGweiPerObservation\",\"type\":\"uint32\"},{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"phbGweiPerTransmission\",\"type\":\"uint32\"}],\"name\":\"BillingSet\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"CheckAccessDisabled\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"CheckAccessEnabled\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"previousConfigBlockNumber\",\"type\":\"uint32\"},{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"configCount\",\"type\":\"uint64\"},{\"indexed\":false,\"internalType\":\"address[]\",\"name\":\"signers\",\"type\":\"address[]\"},{\"indexed\":false,\"internalType\":\"address[]\",\"name\":\"transmitters\",\"type\":\"address[]\"},{\"indexed\":false,\"internalType\":\"uint8\",\"name\":\"threshold\",\"type\":\"uint8\"},{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"encodedConfigVersion\",\"type\":\"uint64\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"encoded\",\"type\":\"bytes\"}],\"name\":\"ConfigSet\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"roundId\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"startedBy\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"startedAt\",\"type\":\"uint256\"}],\"name\":\"NewRound\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint32\",\"name\":\"aggregatorRoundId\",\"type\":\"uint32\"},{\"indexed\":false,\"internalType\":\"int192\",\"name\":\"answer\",\"type\":\"int192\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"transmitter\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"int192[]\",\"name\":\"observations\",\"type\":\"int192[]\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"observers\",\"type\":\"bytes\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"rawReportContext\",\"type\":\"bytes32\"}],\"name\":\"NewTransmission\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"transmitter\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"payee\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"contractPhbTokenInterface\",\"name\":\"phbToken\",\"type\":\"address\"}],\"name\":\"OraclePaid\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"}],\"name\":\"OwnershipTransferRequested\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"transmitter\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"current\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"proposed\",\"type\":\"address\"}],\"name\":\"PayeeshipTransferRequested\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"transmitter\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previous\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"current\",\"type\":\"address\"}],\"name\":\"PayeeshipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"contractPhbTokenInterface\",\"name\":\"_oldPhbToken\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"contractPhbTokenInterface\",\"name\":\"_newPhbToken\",\"type\":\"address\"}],\"name\":\"PhbTokenSet\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"}],\"name\":\"RemovedAccess\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"contractAccessControllerInterface\",\"name\":\"old\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"contractAccessControllerInterface\",\"name\":\"current\",\"type\":\"address\"}],\"name\":\"RequesterAccessControllerSet\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"requester\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes16\",\"name\":\"configDigest\",\"type\":\"bytes16\"},{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"epoch\",\"type\":\"uint32\"},{\"indexed\":false,\"internalType\":\"uint8\",\"name\":\"round\",\"type\":\"uint8\"}],\"name\":\"RoundRequested\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"contractAggregatorValidatorInterface\",\"name\":\"previousValidator\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"previousGasLimit\",\"type\":\"uint32\"},{\"indexed\":true,\"internalType\":\"contractAggregatorValidatorInterface\",\"name\":\"currentValidator\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"currentGasLimit\",\"type\":\"uint32\"}],\"name\":\"ValidatorConfigSet\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"acceptOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_transmitter\",\"type\":\"address\"}],\"name\":\"acceptPayeeship\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_user\",\"type\":\"address\"}],\"name\":\"addAccess\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"billingAccessController\",\"outputs\":[{\"internalType\":\"contractAccessControllerInterface\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"checkEnabled\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"decimals\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"description\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"disableAccessCheck\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"enableAccessCheck\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_roundId\",\"type\":\"uint256\"}],\"name\":\"getAnswer\",\"outputs\":[{\"internalType\":\"int256\",\"name\":\"\",\"type\":\"int256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getBilling\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"maximumGasPrice\",\"type\":\"uint32\"},{\"internalType\":\"uint32\",\"name\":\"reasonableGasPrice\",\"type\":\"uint32\"},{\"internalType\":\"uint32\",\"name\":\"microPhbPerEth\",\"type\":\"uint32\"},{\"internalType\":\"uint32\",\"name\":\"phbGweiPerObservation\",\"type\":\"uint32\"},{\"internalType\":\"uint32\",\"name\":\"phbGweiPerTransmission\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getPhbToken\",\"outputs\":[{\"internalType\":\"contractPhbTokenInterface\",\"name\":\"phbToken\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint80\",\"name\":\"_roundId\",\"type\":\"uint80\"}],\"name\":\"getRoundData\",\"outputs\":[{\"internalType\":\"uint80\",\"name\":\"roundId\",\"type\":\"uint80\"},{\"internalType\":\"int256\",\"name\":\"answer\",\"type\":\"int256\"},{\"internalType\":\"uint256\",\"name\":\"startedAt\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"updatedAt\",\"type\":\"uint256\"},{\"internalType\":\"uint80\",\"name\":\"answeredInRound\",\"type\":\"uint80\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_roundId\",\"type\":\"uint256\"}],\"name\":\"getTimestamp\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_user\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"_calldata\",\"type\":\"bytes\"}],\"name\":\"hasAccess\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"latestAnswer\",\"outputs\":[{\"internalType\":\"int256\",\"name\":\"\",\"type\":\"int256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"latestConfigDetails\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"configCount\",\"type\":\"uint32\"},{\"internalType\":\"uint32\",\"name\":\"blockNumber\",\"type\":\"uint32\"},{\"internalType\":\"bytes16\",\"name\":\"configDigest\",\"type\":\"bytes16\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"latestRound\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"latestRoundData\",\"outputs\":[{\"internalType\":\"uint80\",\"name\":\"roundId\",\"type\":\"uint80\"},{\"internalType\":\"int256\",\"name\":\"answer\",\"type\":\"int256\"},{\"internalType\":\"uint256\",\"name\":\"startedAt\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"updatedAt\",\"type\":\"uint256\"},{\"internalType\":\"uint80\",\"name\":\"answeredInRound\",\"type\":\"uint80\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"latestTimestamp\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"latestTransmissionDetails\",\"outputs\":[{\"internalType\":\"bytes16\",\"name\":\"configDigest\",\"type\":\"bytes16\"},{\"internalType\":\"uint32\",\"name\":\"epoch\",\"type\":\"uint32\"},{\"internalType\":\"uint8\",\"name\":\"round\",\"type\":\"uint8\"},{\"internalType\":\"int192\",\"name\":\"latestAnswer\",\"type\":\"int192\"},{\"internalType\":\"uint64\",\"name\":\"latestTimestamp\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"maxAnswer\",\"outputs\":[{\"internalType\":\"int192\",\"name\":\"\",\"type\":\"int192\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"minAnswer\",\"outputs\":[{\"internalType\":\"int192\",\"name\":\"\",\"type\":\"int192\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_signerOrTransmitter\",\"type\":\"address\"}],\"name\":\"oracleObservationCount\",\"outputs\":[{\"internalType\":\"uint16\",\"name\":\"\",\"type\":\"uint16\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_transmitter\",\"type\":\"address\"}],\"name\":\"owedPayment\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"addresspayable\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"phbAvailableForPayment\",\"outputs\":[{\"internalType\":\"int256\",\"name\":\"availableBalance\",\"type\":\"int256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_user\",\"type\":\"address\"}],\"name\":\"removeAccess\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"requestNewRound\",\"outputs\":[{\"internalType\":\"uint80\",\"name\":\"\",\"type\":\"uint80\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"requesterAccessController\",\"outputs\":[{\"internalType\":\"contractAccessControllerInterface\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint32\",\"name\":\"_maximumGasPrice\",\"type\":\"uint32\"},{\"internalType\":\"uint32\",\"name\":\"_reasonableGasPrice\",\"type\":\"uint32\"},{\"internalType\":\"uint32\",\"name\":\"_microPhbPerEth\",\"type\":\"uint32\"},{\"internalType\":\"uint32\",\"name\":\"_phbGweiPerObservation\",\"type\":\"uint32\"},{\"internalType\":\"uint32\",\"name\":\"_phbGweiPerTransmission\",\"type\":\"uint32\"}],\"name\":\"setBilling\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contractAccessControllerInterface\",\"name\":\"_billingAccessController\",\"type\":\"address\"}],\"name\":\"setBillingAccessController\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"_signers\",\"type\":\"address[]\"},{\"internalType\":\"address[]\",\"name\":\"_transmitters\",\"type\":\"address[]\"},{\"internalType\":\"uint8\",\"name\":\"_threshold\",\"type\":\"uint8\"},{\"internalType\":\"uint64\",\"name\":\"_encodedConfigVersion\",\"type\":\"uint64\"},{\"internalType\":\"bytes\",\"name\":\"_encoded\",\"type\":\"bytes\"}],\"name\":\"setConfig\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"_transmitters\",\"type\":\"address[]\"},{\"internalType\":\"address[]\",\"name\":\"_payees\",\"type\":\"address[]\"}],\"name\":\"setPayees\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contractPhbTokenInterface\",\"name\":\"_phbToken\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_recipient\",\"type\":\"address\"}],\"name\":\"setPhbToken\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contractAccessControllerInterface\",\"name\":\"_requesterAccessController\",\"type\":\"address\"}],\"name\":\"setRequesterAccessController\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contractAggregatorValidatorInterface\",\"name\":\"_newValidator\",\"type\":\"address\"},{\"internalType\":\"uint32\",\"name\":\"_newGasLimit\",\"type\":\"uint32\"}],\"name\":\"setValidatorConfig\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_to\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_transmitter\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_proposed\",\"type\":\"address\"}],\"name\":\"transferPayeeship\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"_report\",\"type\":\"bytes\"},{\"internalType\":\"bytes32[]\",\"name\":\"_rs\",\"type\":\"bytes32[]\"},{\"internalType\":\"bytes32[]\",\"name\":\"_ss\",\"type\":\"bytes32[]\"},{\"internalType\":\"bytes32\",\"name\":\"_rawVs\",\"type\":\"bytes32\"}],\"name\":\"transmit\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"transmitters\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"\",\"type\":\"address[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"typeAndVersion\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"validatorConfig\",\"outputs\":[{\"internalType\":\"contractAggregatorValidatorInterface\",\"name\":\"validator\",\"type\":\"address\"},{\"internalType\":\"uint32\",\"name\":\"gasLimit\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"version\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"}],\"name\":\"withdrawFunds\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_transmitter\",\"type\":\"address\"}],\"name\":\"withdrawPayment\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
+	ABI: "[{\"inputs\":[{\"internalType\":\"uint32\",\"name\":\"_maximumGasPrice\",\"type\":\"uint32\"},{\"internalType\":\"uint32\",\"name\":\"_reasonableGasPrice\",\"type\":\"uint32\"},{\"internalType\":\"uint32\",\"name\":\"_microPhbPerEth\",\"type\":\"uint32\"},{\"internalType\":\"uint32\",\"name\":\"_phbGweiPerObservation\",\"type\":\"uint32\"},{\"internalType\":\"uint32\",\"name\":\"_phbGweiPerTransmission\",\"type\":\"uint32\"},{\"internalType\":\"contractPhbTokenInterface\",\"name\":\"_phb\",\"type\":\"address\"},{\"internalType\":\"int192\",\"name\":\"_minAnswer\",\"type\":\"int192\"},{\"internalType\":\"int192\",\"name\":\"_maxAnswer\",\"type\":\"int192\"},{\"internalType\":\"contractAccessControllerInterface\",\"name\":\"_billingAccessController\",\"type\":\"address\"},{\"internalType\":\"contractAccessControllerInterface\",\"name\":\"_requesterAccessController\",\"type\":\"address\"},{\"internalType\":\"uint8\",\"name\":\"_decimals\",\"type\":\"uint8\"},{\"internalType\":\"string\",\"name\":\"_description\",\"type\":\"string\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"int256\",\"name\":\"current\",\"type\":\"int256\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"roundId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"updatedAt\",\"type\":\"uint256\"}],\"name\":\"AnswerUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"contractAccessControllerInterface\",\"name\":\"old\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"contractAccessControllerInterface\",\"name\":\"current\",\"type\":\"address\"}],\"name\":\"BillingAccessControllerSet\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"maximumGasPrice\",\"type\":\"uint32\"},{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"reasonableGasPrice\",\"type\":\"uint32\"},{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"microPhbPerEth\",\"type\":\"uint32\"},{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"phbGweiPerObservation\",\"type\":\"uint32\"},{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"phbGweiPerTransmission\",\"type\":\"uint32\"}],\"name\":\"BillingSet\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"previousConfigBlockNumber\",\"type\":\"uint32\"},{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"configCount\",\"type\":\"uint64\"},{\"indexed\":false,\"internalType\":\"address[]\",\"name\":\"signers\",\"type\":\"address[]\"},{\"indexed\":false,\"internalType\":\"address[]\",\"name\":\"transmitters\",\"type\":\"address[]\"},{\"indexed\":false,\"internalType\":\"uint8\",\"name\":\"threshold\",\"type\":\"uint8\"},{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"encodedConfigVersion\",\"type\":\"uint64\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"encoded\",\"type\":\"bytes\"}],\"name\":\"ConfigSet\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256[]\",\"name\":\"oldIndexes\",\"type\":\"uint256[]\"},{\"indexed\":false,\"internalType\":\"uint256[]\",\"name\":\"newIndexes\",\"type\":\"uint256[]\"}],\"name\":\"NewIndexes\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"roundId\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"startedBy\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"startedAt\",\"type\":\"uint256\"}],\"name\":\"NewRound\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint32\",\"name\":\"aggregatorRoundId\",\"type\":\"uint32\"},{\"indexed\":false,\"internalType\":\"int192\",\"name\":\"answer\",\"type\":\"int192\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"transmitter\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"int192[]\",\"name\":\"observations\",\"type\":\"int192[]\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"observers\",\"type\":\"bytes\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"rawReportContext\",\"type\":\"bytes32\"}],\"name\":\"NewTransmission\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"transmitter\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"payee\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"contractPhbTokenInterface\",\"name\":\"phbToken\",\"type\":\"address\"}],\"name\":\"OraclePaid\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"}],\"name\":\"OwnershipTransferRequested\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"transmitter\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"current\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"proposed\",\"type\":\"address\"}],\"name\":\"PayeeshipTransferRequested\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"transmitter\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previous\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"current\",\"type\":\"address\"}],\"name\":\"PayeeshipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"contractPhbTokenInterface\",\"name\":\"_oldPhbToken\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"contractPhbTokenInterface\",\"name\":\"_newPhbToken\",\"type\":\"address\"}],\"name\":\"PhbTokenSet\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"contractAccessControllerInterface\",\"name\":\"old\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"contractAccessControllerInterface\",\"name\":\"current\",\"type\":\"address\"}],\"name\":\"RequesterAccessControllerSet\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"requester\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes16\",\"name\":\"configDigest\",\"type\":\"bytes16\"},{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"epoch\",\"type\":\"uint32\"},{\"indexed\":false,\"internalType\":\"uint8\",\"name\":\"round\",\"type\":\"uint8\"}],\"name\":\"RoundRequested\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"contractAggregatorValidatorInterface\",\"name\":\"previousValidator\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"previousGasLimit\",\"type\":\"uint32\"},{\"indexed\":true,\"internalType\":\"contractAggregatorValidatorInterface\",\"name\":\"currentValidator\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"currentGasLimit\",\"type\":\"uint32\"}],\"name\":\"ValidatorConfigSet\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"acceptOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_transmitter\",\"type\":\"address\"}],\"name\":\"acceptPayeeship\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"billingAccessController\",\"outputs\":[{\"internalType\":\"contractAccessControllerInterface\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"decimals\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"description\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_roundId\",\"type\":\"uint256\"}],\"name\":\"getAnswer\",\"outputs\":[{\"internalType\":\"int256\",\"name\":\"\",\"type\":\"int256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getBilling\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"maximumGasPrice\",\"type\":\"uint32\"},{\"internalType\":\"uint32\",\"name\":\"reasonableGasPrice\",\"type\":\"uint32\"},{\"internalType\":\"uint32\",\"name\":\"microPhbPerEth\",\"type\":\"uint32\"},{\"internalType\":\"uint32\",\"name\":\"phbGweiPerObservation\",\"type\":\"uint32\"},{\"internalType\":\"uint32\",\"name\":\"phbGweiPerTransmission\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getIndexes\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"\",\"type\":\"uint256[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getPhbToken\",\"outputs\":[{\"internalType\":\"contractPhbTokenInterface\",\"name\":\"phbToken\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint80\",\"name\":\"_roundId\",\"type\":\"uint80\"}],\"name\":\"getRoundData\",\"outputs\":[{\"internalType\":\"uint80\",\"name\":\"roundId\",\"type\":\"uint80\"},{\"internalType\":\"int256\",\"name\":\"answer\",\"type\":\"int256\"},{\"internalType\":\"uint256\",\"name\":\"startedAt\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"updatedAt\",\"type\":\"uint256\"},{\"internalType\":\"uint80\",\"name\":\"answeredInRound\",\"type\":\"uint80\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_roundId\",\"type\":\"uint256\"}],\"name\":\"getTimestamp\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"indexCount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"latestAnswer\",\"outputs\":[{\"internalType\":\"int256\",\"name\":\"\",\"type\":\"int256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"latestConfigDetails\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"configCount\",\"type\":\"uint32\"},{\"internalType\":\"uint32\",\"name\":\"blockNumber\",\"type\":\"uint32\"},{\"internalType\":\"bytes16\",\"name\":\"configDigest\",\"type\":\"bytes16\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"latestRound\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"latestRoundData\",\"outputs\":[{\"internalType\":\"uint80\",\"name\":\"roundId\",\"type\":\"uint80\"},{\"internalType\":\"int256\",\"name\":\"answer\",\"type\":\"int256\"},{\"internalType\":\"uint256\",\"name\":\"startedAt\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"updatedAt\",\"type\":\"uint256\"},{\"internalType\":\"uint80\",\"name\":\"answeredInRound\",\"type\":\"uint80\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"latestTimestamp\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"latestTransmissionDetails\",\"outputs\":[{\"internalType\":\"bytes16\",\"name\":\"configDigest\",\"type\":\"bytes16\"},{\"internalType\":\"uint32\",\"name\":\"epoch\",\"type\":\"uint32\"},{\"internalType\":\"uint8\",\"name\":\"round\",\"type\":\"uint8\"},{\"internalType\":\"int192\",\"name\":\"latestAnswer\",\"type\":\"int192\"},{\"internalType\":\"uint64\",\"name\":\"latestTimestamp\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"maxAnswer\",\"outputs\":[{\"internalType\":\"int192\",\"name\":\"\",\"type\":\"int192\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"minAnswer\",\"outputs\":[{\"internalType\":\"int192\",\"name\":\"\",\"type\":\"int192\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_signerOrTransmitter\",\"type\":\"address\"}],\"name\":\"oracleObservationCount\",\"outputs\":[{\"internalType\":\"uint16\",\"name\":\"\",\"type\":\"uint16\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_transmitter\",\"type\":\"address\"}],\"name\":\"owedPayment\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"addresspayable\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"phbAvailableForPayment\",\"outputs\":[{\"internalType\":\"int256\",\"name\":\"availableBalance\",\"type\":\"int256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"requestNewIndexes\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"\",\"type\":\"uint256[]\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"requestNewRound\",\"outputs\":[{\"internalType\":\"uint80\",\"name\":\"\",\"type\":\"uint80\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"requesterAccessController\",\"outputs\":[{\"internalType\":\"contractAccessControllerInterface\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint32\",\"name\":\"_maximumGasPrice\",\"type\":\"uint32\"},{\"internalType\":\"uint32\",\"name\":\"_reasonableGasPrice\",\"type\":\"uint32\"},{\"internalType\":\"uint32\",\"name\":\"_microPhbPerEth\",\"type\":\"uint32\"},{\"internalType\":\"uint32\",\"name\":\"_phbGweiPerObservation\",\"type\":\"uint32\"},{\"internalType\":\"uint32\",\"name\":\"_phbGweiPerTransmission\",\"type\":\"uint32\"}],\"name\":\"setBilling\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contractAccessControllerInterface\",\"name\":\"_billingAccessController\",\"type\":\"address\"}],\"name\":\"setBillingAccessController\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"_signers\",\"type\":\"address[]\"},{\"internalType\":\"address[]\",\"name\":\"_transmitters\",\"type\":\"address[]\"},{\"internalType\":\"uint8\",\"name\":\"_threshold\",\"type\":\"uint8\"},{\"internalType\":\"uint64\",\"name\":\"_encodedConfigVersion\",\"type\":\"uint64\"},{\"internalType\":\"bytes\",\"name\":\"_encoded\",\"type\":\"bytes\"}],\"name\":\"setConfig\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"count\",\"type\":\"uint256\"}],\"name\":\"setIndexCount\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"_transmitters\",\"type\":\"address[]\"},{\"internalType\":\"address[]\",\"name\":\"_payees\",\"type\":\"address[]\"}],\"name\":\"setPayees\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contractPhbTokenInterface\",\"name\":\"_phbToken\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_recipient\",\"type\":\"address\"}],\"name\":\"setPhbToken\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contractAccessControllerInterface\",\"name\":\"_requesterAccessController\",\"type\":\"address\"}],\"name\":\"setRequesterAccessController\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contractAggregatorValidatorInterface\",\"name\":\"_newValidator\",\"type\":\"address\"},{\"internalType\":\"uint32\",\"name\":\"_newGasLimit\",\"type\":\"uint32\"}],\"name\":\"setValidatorConfig\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_to\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_transmitter\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_proposed\",\"type\":\"address\"}],\"name\":\"transferPayeeship\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"_report\",\"type\":\"bytes\"},{\"internalType\":\"bytes32[]\",\"name\":\"_rs\",\"type\":\"bytes32[]\"},{\"internalType\":\"bytes32[]\",\"name\":\"_ss\",\"type\":\"bytes32[]\"},{\"internalType\":\"bytes32\",\"name\":\"_rawVs\",\"type\":\"bytes32\"}],\"name\":\"transmit\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"transmitters\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"\",\"type\":\"address[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"typeAndVersion\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"validatorConfig\",\"outputs\":[{\"internalType\":\"contractAggregatorValidatorInterface\",\"name\":\"validator\",\"type\":\"address\"},{\"internalType\":\"uint32\",\"name\":\"gasLimit\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"version\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"}],\"name\":\"withdrawFunds\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_transmitter\",\"type\":\"address\"}],\"name\":\"withdrawPayment\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
 }
 
 var OffchainAggregatorABI = OffchainAggregatorMetaData.ABI
@@ -173,28 +173,6 @@ func (_OffchainAggregator *OffchainAggregatorCallerSession) BillingAccessControl
 	return _OffchainAggregator.Contract.BillingAccessController(&_OffchainAggregator.CallOpts)
 }
 
-func (_OffchainAggregator *OffchainAggregatorCaller) CheckEnabled(opts *bind.CallOpts) (bool, error) {
-	var out []interface{}
-	err := _OffchainAggregator.contract.Call(opts, &out, "checkEnabled")
-
-	if err != nil {
-		return *new(bool), err
-	}
-
-	out0 := *abi.ConvertType(out[0], new(bool)).(*bool)
-
-	return out0, err
-
-}
-
-func (_OffchainAggregator *OffchainAggregatorSession) CheckEnabled() (bool, error) {
-	return _OffchainAggregator.Contract.CheckEnabled(&_OffchainAggregator.CallOpts)
-}
-
-func (_OffchainAggregator *OffchainAggregatorCallerSession) CheckEnabled() (bool, error) {
-	return _OffchainAggregator.Contract.CheckEnabled(&_OffchainAggregator.CallOpts)
-}
-
 func (_OffchainAggregator *OffchainAggregatorCaller) Decimals(opts *bind.CallOpts) (uint8, error) {
 	var out []interface{}
 	err := _OffchainAggregator.contract.Call(opts, &out, "decimals")
@@ -294,6 +272,28 @@ func (_OffchainAggregator *OffchainAggregatorCallerSession) GetBilling() (GetBil
 	return _OffchainAggregator.Contract.GetBilling(&_OffchainAggregator.CallOpts)
 }
 
+func (_OffchainAggregator *OffchainAggregatorCaller) GetIndexes(opts *bind.CallOpts) ([]*big.Int, error) {
+	var out []interface{}
+	err := _OffchainAggregator.contract.Call(opts, &out, "getIndexes")
+
+	if err != nil {
+		return *new([]*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new([]*big.Int)).(*[]*big.Int)
+
+	return out0, err
+
+}
+
+func (_OffchainAggregator *OffchainAggregatorSession) GetIndexes() ([]*big.Int, error) {
+	return _OffchainAggregator.Contract.GetIndexes(&_OffchainAggregator.CallOpts)
+}
+
+func (_OffchainAggregator *OffchainAggregatorCallerSession) GetIndexes() ([]*big.Int, error) {
+	return _OffchainAggregator.Contract.GetIndexes(&_OffchainAggregator.CallOpts)
+}
+
 func (_OffchainAggregator *OffchainAggregatorCaller) GetPhbToken(opts *bind.CallOpts) (common.Address, error) {
 	var out []interface{}
 	err := _OffchainAggregator.contract.Call(opts, &out, "getPhbToken")
@@ -371,26 +371,26 @@ func (_OffchainAggregator *OffchainAggregatorCallerSession) GetTimestamp(_roundI
 	return _OffchainAggregator.Contract.GetTimestamp(&_OffchainAggregator.CallOpts, _roundId)
 }
 
-func (_OffchainAggregator *OffchainAggregatorCaller) HasAccess(opts *bind.CallOpts, _user common.Address, _calldata []byte) (bool, error) {
+func (_OffchainAggregator *OffchainAggregatorCaller) IndexCount(opts *bind.CallOpts) (*big.Int, error) {
 	var out []interface{}
-	err := _OffchainAggregator.contract.Call(opts, &out, "hasAccess", _user, _calldata)
+	err := _OffchainAggregator.contract.Call(opts, &out, "indexCount")
 
 	if err != nil {
-		return *new(bool), err
+		return *new(*big.Int), err
 	}
 
-	out0 := *abi.ConvertType(out[0], new(bool)).(*bool)
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
 
 	return out0, err
 
 }
 
-func (_OffchainAggregator *OffchainAggregatorSession) HasAccess(_user common.Address, _calldata []byte) (bool, error) {
-	return _OffchainAggregator.Contract.HasAccess(&_OffchainAggregator.CallOpts, _user, _calldata)
+func (_OffchainAggregator *OffchainAggregatorSession) IndexCount() (*big.Int, error) {
+	return _OffchainAggregator.Contract.IndexCount(&_OffchainAggregator.CallOpts)
 }
 
-func (_OffchainAggregator *OffchainAggregatorCallerSession) HasAccess(_user common.Address, _calldata []byte) (bool, error) {
-	return _OffchainAggregator.Contract.HasAccess(&_OffchainAggregator.CallOpts, _user, _calldata)
+func (_OffchainAggregator *OffchainAggregatorCallerSession) IndexCount() (*big.Int, error) {
+	return _OffchainAggregator.Contract.IndexCount(&_OffchainAggregator.CallOpts)
 }
 
 func (_OffchainAggregator *OffchainAggregatorCaller) LatestAnswer(opts *bind.CallOpts) (*big.Int, error) {
@@ -830,52 +830,16 @@ func (_OffchainAggregator *OffchainAggregatorTransactorSession) AcceptPayeeship(
 	return _OffchainAggregator.Contract.AcceptPayeeship(&_OffchainAggregator.TransactOpts, _transmitter)
 }
 
-func (_OffchainAggregator *OffchainAggregatorTransactor) AddAccess(opts *bind.TransactOpts, _user common.Address) (*types.Transaction, error) {
-	return _OffchainAggregator.contract.Transact(opts, "addAccess", _user)
+func (_OffchainAggregator *OffchainAggregatorTransactor) RequestNewIndexes(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _OffchainAggregator.contract.Transact(opts, "requestNewIndexes")
 }
 
-func (_OffchainAggregator *OffchainAggregatorSession) AddAccess(_user common.Address) (*types.Transaction, error) {
-	return _OffchainAggregator.Contract.AddAccess(&_OffchainAggregator.TransactOpts, _user)
+func (_OffchainAggregator *OffchainAggregatorSession) RequestNewIndexes() (*types.Transaction, error) {
+	return _OffchainAggregator.Contract.RequestNewIndexes(&_OffchainAggregator.TransactOpts)
 }
 
-func (_OffchainAggregator *OffchainAggregatorTransactorSession) AddAccess(_user common.Address) (*types.Transaction, error) {
-	return _OffchainAggregator.Contract.AddAccess(&_OffchainAggregator.TransactOpts, _user)
-}
-
-func (_OffchainAggregator *OffchainAggregatorTransactor) DisableAccessCheck(opts *bind.TransactOpts) (*types.Transaction, error) {
-	return _OffchainAggregator.contract.Transact(opts, "disableAccessCheck")
-}
-
-func (_OffchainAggregator *OffchainAggregatorSession) DisableAccessCheck() (*types.Transaction, error) {
-	return _OffchainAggregator.Contract.DisableAccessCheck(&_OffchainAggregator.TransactOpts)
-}
-
-func (_OffchainAggregator *OffchainAggregatorTransactorSession) DisableAccessCheck() (*types.Transaction, error) {
-	return _OffchainAggregator.Contract.DisableAccessCheck(&_OffchainAggregator.TransactOpts)
-}
-
-func (_OffchainAggregator *OffchainAggregatorTransactor) EnableAccessCheck(opts *bind.TransactOpts) (*types.Transaction, error) {
-	return _OffchainAggregator.contract.Transact(opts, "enableAccessCheck")
-}
-
-func (_OffchainAggregator *OffchainAggregatorSession) EnableAccessCheck() (*types.Transaction, error) {
-	return _OffchainAggregator.Contract.EnableAccessCheck(&_OffchainAggregator.TransactOpts)
-}
-
-func (_OffchainAggregator *OffchainAggregatorTransactorSession) EnableAccessCheck() (*types.Transaction, error) {
-	return _OffchainAggregator.Contract.EnableAccessCheck(&_OffchainAggregator.TransactOpts)
-}
-
-func (_OffchainAggregator *OffchainAggregatorTransactor) RemoveAccess(opts *bind.TransactOpts, _user common.Address) (*types.Transaction, error) {
-	return _OffchainAggregator.contract.Transact(opts, "removeAccess", _user)
-}
-
-func (_OffchainAggregator *OffchainAggregatorSession) RemoveAccess(_user common.Address) (*types.Transaction, error) {
-	return _OffchainAggregator.Contract.RemoveAccess(&_OffchainAggregator.TransactOpts, _user)
-}
-
-func (_OffchainAggregator *OffchainAggregatorTransactorSession) RemoveAccess(_user common.Address) (*types.Transaction, error) {
-	return _OffchainAggregator.Contract.RemoveAccess(&_OffchainAggregator.TransactOpts, _user)
+func (_OffchainAggregator *OffchainAggregatorTransactorSession) RequestNewIndexes() (*types.Transaction, error) {
+	return _OffchainAggregator.Contract.RequestNewIndexes(&_OffchainAggregator.TransactOpts)
 }
 
 func (_OffchainAggregator *OffchainAggregatorTransactor) RequestNewRound(opts *bind.TransactOpts) (*types.Transaction, error) {
@@ -924,6 +888,18 @@ func (_OffchainAggregator *OffchainAggregatorSession) SetConfig(_signers []commo
 
 func (_OffchainAggregator *OffchainAggregatorTransactorSession) SetConfig(_signers []common.Address, _transmitters []common.Address, _threshold uint8, _encodedConfigVersion uint64, _encoded []byte) (*types.Transaction, error) {
 	return _OffchainAggregator.Contract.SetConfig(&_OffchainAggregator.TransactOpts, _signers, _transmitters, _threshold, _encodedConfigVersion, _encoded)
+}
+
+func (_OffchainAggregator *OffchainAggregatorTransactor) SetIndexCount(opts *bind.TransactOpts, count *big.Int) (*types.Transaction, error) {
+	return _OffchainAggregator.contract.Transact(opts, "setIndexCount", count)
+}
+
+func (_OffchainAggregator *OffchainAggregatorSession) SetIndexCount(count *big.Int) (*types.Transaction, error) {
+	return _OffchainAggregator.Contract.SetIndexCount(&_OffchainAggregator.TransactOpts, count)
+}
+
+func (_OffchainAggregator *OffchainAggregatorTransactorSession) SetIndexCount(count *big.Int) (*types.Transaction, error) {
+	return _OffchainAggregator.Contract.SetIndexCount(&_OffchainAggregator.TransactOpts, count)
 }
 
 func (_OffchainAggregator *OffchainAggregatorTransactor) SetPayees(opts *bind.TransactOpts, _transmitters []common.Address, _payees []common.Address) (*types.Transaction, error) {
@@ -1032,123 +1008,6 @@ func (_OffchainAggregator *OffchainAggregatorSession) WithdrawPayment(_transmitt
 
 func (_OffchainAggregator *OffchainAggregatorTransactorSession) WithdrawPayment(_transmitter common.Address) (*types.Transaction, error) {
 	return _OffchainAggregator.Contract.WithdrawPayment(&_OffchainAggregator.TransactOpts, _transmitter)
-}
-
-type OffchainAggregatorAddedAccessIterator struct {
-	Event *OffchainAggregatorAddedAccess
-
-	contract *bind.BoundContract
-	event    string
-
-	logs chan types.Log
-	sub  ethereum.Subscription
-	done bool
-	fail error
-}
-
-func (it *OffchainAggregatorAddedAccessIterator) Next() bool {
-
-	if it.fail != nil {
-		return false
-	}
-
-	if it.done {
-		select {
-		case log := <-it.logs:
-			it.Event = new(OffchainAggregatorAddedAccess)
-			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-				it.fail = err
-				return false
-			}
-			it.Event.Raw = log
-			return true
-
-		default:
-			return false
-		}
-	}
-
-	select {
-	case log := <-it.logs:
-		it.Event = new(OffchainAggregatorAddedAccess)
-		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-			it.fail = err
-			return false
-		}
-		it.Event.Raw = log
-		return true
-
-	case err := <-it.sub.Err():
-		it.done = true
-		it.fail = err
-		return it.Next()
-	}
-}
-
-func (it *OffchainAggregatorAddedAccessIterator) Error() error {
-	return it.fail
-}
-
-func (it *OffchainAggregatorAddedAccessIterator) Close() error {
-	it.sub.Unsubscribe()
-	return nil
-}
-
-type OffchainAggregatorAddedAccess struct {
-	User common.Address
-	Raw  types.Log
-}
-
-func (_OffchainAggregator *OffchainAggregatorFilterer) FilterAddedAccess(opts *bind.FilterOpts) (*OffchainAggregatorAddedAccessIterator, error) {
-
-	logs, sub, err := _OffchainAggregator.contract.FilterLogs(opts, "AddedAccess")
-	if err != nil {
-		return nil, err
-	}
-	return &OffchainAggregatorAddedAccessIterator{contract: _OffchainAggregator.contract, event: "AddedAccess", logs: logs, sub: sub}, nil
-}
-
-func (_OffchainAggregator *OffchainAggregatorFilterer) WatchAddedAccess(opts *bind.WatchOpts, sink chan<- *OffchainAggregatorAddedAccess) (event.Subscription, error) {
-
-	logs, sub, err := _OffchainAggregator.contract.WatchLogs(opts, "AddedAccess")
-	if err != nil {
-		return nil, err
-	}
-	return event.NewSubscription(func(quit <-chan struct{}) error {
-		defer sub.Unsubscribe()
-		for {
-			select {
-			case log := <-logs:
-
-				event := new(OffchainAggregatorAddedAccess)
-				if err := _OffchainAggregator.contract.UnpackLog(event, "AddedAccess", log); err != nil {
-					return err
-				}
-				event.Raw = log
-
-				select {
-				case sink <- event:
-				case err := <-sub.Err():
-					return err
-				case <-quit:
-					return nil
-				}
-			case err := <-sub.Err():
-				return err
-			case <-quit:
-				return nil
-			}
-		}
-	}), nil
-}
-
-func (_OffchainAggregator *OffchainAggregatorFilterer) ParseAddedAccess(log types.Log) (*OffchainAggregatorAddedAccess, error) {
-	event := new(OffchainAggregatorAddedAccess)
-	if err := _OffchainAggregator.contract.UnpackLog(event, "AddedAccess", log); err != nil {
-		return nil, err
-	}
-	event.Raw = log
-	return event, nil
 }
 
 type OffchainAggregatorAnswerUpdatedIterator struct {
@@ -1527,238 +1386,6 @@ func (_OffchainAggregator *OffchainAggregatorFilterer) ParseBillingSet(log types
 	return event, nil
 }
 
-type OffchainAggregatorCheckAccessDisabledIterator struct {
-	Event *OffchainAggregatorCheckAccessDisabled
-
-	contract *bind.BoundContract
-	event    string
-
-	logs chan types.Log
-	sub  ethereum.Subscription
-	done bool
-	fail error
-}
-
-func (it *OffchainAggregatorCheckAccessDisabledIterator) Next() bool {
-
-	if it.fail != nil {
-		return false
-	}
-
-	if it.done {
-		select {
-		case log := <-it.logs:
-			it.Event = new(OffchainAggregatorCheckAccessDisabled)
-			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-				it.fail = err
-				return false
-			}
-			it.Event.Raw = log
-			return true
-
-		default:
-			return false
-		}
-	}
-
-	select {
-	case log := <-it.logs:
-		it.Event = new(OffchainAggregatorCheckAccessDisabled)
-		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-			it.fail = err
-			return false
-		}
-		it.Event.Raw = log
-		return true
-
-	case err := <-it.sub.Err():
-		it.done = true
-		it.fail = err
-		return it.Next()
-	}
-}
-
-func (it *OffchainAggregatorCheckAccessDisabledIterator) Error() error {
-	return it.fail
-}
-
-func (it *OffchainAggregatorCheckAccessDisabledIterator) Close() error {
-	it.sub.Unsubscribe()
-	return nil
-}
-
-type OffchainAggregatorCheckAccessDisabled struct {
-	Raw types.Log
-}
-
-func (_OffchainAggregator *OffchainAggregatorFilterer) FilterCheckAccessDisabled(opts *bind.FilterOpts) (*OffchainAggregatorCheckAccessDisabledIterator, error) {
-
-	logs, sub, err := _OffchainAggregator.contract.FilterLogs(opts, "CheckAccessDisabled")
-	if err != nil {
-		return nil, err
-	}
-	return &OffchainAggregatorCheckAccessDisabledIterator{contract: _OffchainAggregator.contract, event: "CheckAccessDisabled", logs: logs, sub: sub}, nil
-}
-
-func (_OffchainAggregator *OffchainAggregatorFilterer) WatchCheckAccessDisabled(opts *bind.WatchOpts, sink chan<- *OffchainAggregatorCheckAccessDisabled) (event.Subscription, error) {
-
-	logs, sub, err := _OffchainAggregator.contract.WatchLogs(opts, "CheckAccessDisabled")
-	if err != nil {
-		return nil, err
-	}
-	return event.NewSubscription(func(quit <-chan struct{}) error {
-		defer sub.Unsubscribe()
-		for {
-			select {
-			case log := <-logs:
-
-				event := new(OffchainAggregatorCheckAccessDisabled)
-				if err := _OffchainAggregator.contract.UnpackLog(event, "CheckAccessDisabled", log); err != nil {
-					return err
-				}
-				event.Raw = log
-
-				select {
-				case sink <- event:
-				case err := <-sub.Err():
-					return err
-				case <-quit:
-					return nil
-				}
-			case err := <-sub.Err():
-				return err
-			case <-quit:
-				return nil
-			}
-		}
-	}), nil
-}
-
-func (_OffchainAggregator *OffchainAggregatorFilterer) ParseCheckAccessDisabled(log types.Log) (*OffchainAggregatorCheckAccessDisabled, error) {
-	event := new(OffchainAggregatorCheckAccessDisabled)
-	if err := _OffchainAggregator.contract.UnpackLog(event, "CheckAccessDisabled", log); err != nil {
-		return nil, err
-	}
-	event.Raw = log
-	return event, nil
-}
-
-type OffchainAggregatorCheckAccessEnabledIterator struct {
-	Event *OffchainAggregatorCheckAccessEnabled
-
-	contract *bind.BoundContract
-	event    string
-
-	logs chan types.Log
-	sub  ethereum.Subscription
-	done bool
-	fail error
-}
-
-func (it *OffchainAggregatorCheckAccessEnabledIterator) Next() bool {
-
-	if it.fail != nil {
-		return false
-	}
-
-	if it.done {
-		select {
-		case log := <-it.logs:
-			it.Event = new(OffchainAggregatorCheckAccessEnabled)
-			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-				it.fail = err
-				return false
-			}
-			it.Event.Raw = log
-			return true
-
-		default:
-			return false
-		}
-	}
-
-	select {
-	case log := <-it.logs:
-		it.Event = new(OffchainAggregatorCheckAccessEnabled)
-		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-			it.fail = err
-			return false
-		}
-		it.Event.Raw = log
-		return true
-
-	case err := <-it.sub.Err():
-		it.done = true
-		it.fail = err
-		return it.Next()
-	}
-}
-
-func (it *OffchainAggregatorCheckAccessEnabledIterator) Error() error {
-	return it.fail
-}
-
-func (it *OffchainAggregatorCheckAccessEnabledIterator) Close() error {
-	it.sub.Unsubscribe()
-	return nil
-}
-
-type OffchainAggregatorCheckAccessEnabled struct {
-	Raw types.Log
-}
-
-func (_OffchainAggregator *OffchainAggregatorFilterer) FilterCheckAccessEnabled(opts *bind.FilterOpts) (*OffchainAggregatorCheckAccessEnabledIterator, error) {
-
-	logs, sub, err := _OffchainAggregator.contract.FilterLogs(opts, "CheckAccessEnabled")
-	if err != nil {
-		return nil, err
-	}
-	return &OffchainAggregatorCheckAccessEnabledIterator{contract: _OffchainAggregator.contract, event: "CheckAccessEnabled", logs: logs, sub: sub}, nil
-}
-
-func (_OffchainAggregator *OffchainAggregatorFilterer) WatchCheckAccessEnabled(opts *bind.WatchOpts, sink chan<- *OffchainAggregatorCheckAccessEnabled) (event.Subscription, error) {
-
-	logs, sub, err := _OffchainAggregator.contract.WatchLogs(opts, "CheckAccessEnabled")
-	if err != nil {
-		return nil, err
-	}
-	return event.NewSubscription(func(quit <-chan struct{}) error {
-		defer sub.Unsubscribe()
-		for {
-			select {
-			case log := <-logs:
-
-				event := new(OffchainAggregatorCheckAccessEnabled)
-				if err := _OffchainAggregator.contract.UnpackLog(event, "CheckAccessEnabled", log); err != nil {
-					return err
-				}
-				event.Raw = log
-
-				select {
-				case sink <- event:
-				case err := <-sub.Err():
-					return err
-				case <-quit:
-					return nil
-				}
-			case err := <-sub.Err():
-				return err
-			case <-quit:
-				return nil
-			}
-		}
-	}), nil
-}
-
-func (_OffchainAggregator *OffchainAggregatorFilterer) ParseCheckAccessEnabled(log types.Log) (*OffchainAggregatorCheckAccessEnabled, error) {
-	event := new(OffchainAggregatorCheckAccessEnabled)
-	if err := _OffchainAggregator.contract.UnpackLog(event, "CheckAccessEnabled", log); err != nil {
-		return nil, err
-	}
-	event.Raw = log
-	return event, nil
-}
-
 type OffchainAggregatorConfigSetIterator struct {
 	Event *OffchainAggregatorConfigSet
 
@@ -1876,6 +1503,124 @@ func (_OffchainAggregator *OffchainAggregatorFilterer) WatchConfigSet(opts *bind
 func (_OffchainAggregator *OffchainAggregatorFilterer) ParseConfigSet(log types.Log) (*OffchainAggregatorConfigSet, error) {
 	event := new(OffchainAggregatorConfigSet)
 	if err := _OffchainAggregator.contract.UnpackLog(event, "ConfigSet", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
+type OffchainAggregatorNewIndexesIterator struct {
+	Event *OffchainAggregatorNewIndexes
+
+	contract *bind.BoundContract
+	event    string
+
+	logs chan types.Log
+	sub  ethereum.Subscription
+	done bool
+	fail error
+}
+
+func (it *OffchainAggregatorNewIndexesIterator) Next() bool {
+
+	if it.fail != nil {
+		return false
+	}
+
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(OffchainAggregatorNewIndexes)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+
+	select {
+	case log := <-it.logs:
+		it.Event = new(OffchainAggregatorNewIndexes)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+func (it *OffchainAggregatorNewIndexesIterator) Error() error {
+	return it.fail
+}
+
+func (it *OffchainAggregatorNewIndexesIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+type OffchainAggregatorNewIndexes struct {
+	OldIndexes []*big.Int
+	NewIndexes []*big.Int
+	Raw        types.Log
+}
+
+func (_OffchainAggregator *OffchainAggregatorFilterer) FilterNewIndexes(opts *bind.FilterOpts) (*OffchainAggregatorNewIndexesIterator, error) {
+
+	logs, sub, err := _OffchainAggregator.contract.FilterLogs(opts, "NewIndexes")
+	if err != nil {
+		return nil, err
+	}
+	return &OffchainAggregatorNewIndexesIterator{contract: _OffchainAggregator.contract, event: "NewIndexes", logs: logs, sub: sub}, nil
+}
+
+func (_OffchainAggregator *OffchainAggregatorFilterer) WatchNewIndexes(opts *bind.WatchOpts, sink chan<- *OffchainAggregatorNewIndexes) (event.Subscription, error) {
+
+	logs, sub, err := _OffchainAggregator.contract.WatchLogs(opts, "NewIndexes")
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+
+				event := new(OffchainAggregatorNewIndexes)
+				if err := _OffchainAggregator.contract.UnpackLog(event, "NewIndexes", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+func (_OffchainAggregator *OffchainAggregatorFilterer) ParseNewIndexes(log types.Log) (*OffchainAggregatorNewIndexes, error) {
+	event := new(OffchainAggregatorNewIndexes)
+	if err := _OffchainAggregator.contract.UnpackLog(event, "NewIndexes", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
@@ -2997,123 +2742,6 @@ func (_OffchainAggregator *OffchainAggregatorFilterer) ParsePhbTokenSet(log type
 	return event, nil
 }
 
-type OffchainAggregatorRemovedAccessIterator struct {
-	Event *OffchainAggregatorRemovedAccess
-
-	contract *bind.BoundContract
-	event    string
-
-	logs chan types.Log
-	sub  ethereum.Subscription
-	done bool
-	fail error
-}
-
-func (it *OffchainAggregatorRemovedAccessIterator) Next() bool {
-
-	if it.fail != nil {
-		return false
-	}
-
-	if it.done {
-		select {
-		case log := <-it.logs:
-			it.Event = new(OffchainAggregatorRemovedAccess)
-			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-				it.fail = err
-				return false
-			}
-			it.Event.Raw = log
-			return true
-
-		default:
-			return false
-		}
-	}
-
-	select {
-	case log := <-it.logs:
-		it.Event = new(OffchainAggregatorRemovedAccess)
-		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-			it.fail = err
-			return false
-		}
-		it.Event.Raw = log
-		return true
-
-	case err := <-it.sub.Err():
-		it.done = true
-		it.fail = err
-		return it.Next()
-	}
-}
-
-func (it *OffchainAggregatorRemovedAccessIterator) Error() error {
-	return it.fail
-}
-
-func (it *OffchainAggregatorRemovedAccessIterator) Close() error {
-	it.sub.Unsubscribe()
-	return nil
-}
-
-type OffchainAggregatorRemovedAccess struct {
-	User common.Address
-	Raw  types.Log
-}
-
-func (_OffchainAggregator *OffchainAggregatorFilterer) FilterRemovedAccess(opts *bind.FilterOpts) (*OffchainAggregatorRemovedAccessIterator, error) {
-
-	logs, sub, err := _OffchainAggregator.contract.FilterLogs(opts, "RemovedAccess")
-	if err != nil {
-		return nil, err
-	}
-	return &OffchainAggregatorRemovedAccessIterator{contract: _OffchainAggregator.contract, event: "RemovedAccess", logs: logs, sub: sub}, nil
-}
-
-func (_OffchainAggregator *OffchainAggregatorFilterer) WatchRemovedAccess(opts *bind.WatchOpts, sink chan<- *OffchainAggregatorRemovedAccess) (event.Subscription, error) {
-
-	logs, sub, err := _OffchainAggregator.contract.WatchLogs(opts, "RemovedAccess")
-	if err != nil {
-		return nil, err
-	}
-	return event.NewSubscription(func(quit <-chan struct{}) error {
-		defer sub.Unsubscribe()
-		for {
-			select {
-			case log := <-logs:
-
-				event := new(OffchainAggregatorRemovedAccess)
-				if err := _OffchainAggregator.contract.UnpackLog(event, "RemovedAccess", log); err != nil {
-					return err
-				}
-				event.Raw = log
-
-				select {
-				case sink <- event:
-				case err := <-sub.Err():
-					return err
-				case <-quit:
-					return nil
-				}
-			case err := <-sub.Err():
-				return err
-			case <-quit:
-				return nil
-			}
-		}
-	}), nil
-}
-
-func (_OffchainAggregator *OffchainAggregatorFilterer) ParseRemovedAccess(log types.Log) (*OffchainAggregatorRemovedAccess, error) {
-	event := new(OffchainAggregatorRemovedAccess)
-	if err := _OffchainAggregator.contract.UnpackLog(event, "RemovedAccess", log); err != nil {
-		return nil, err
-	}
-	event.Raw = log
-	return event, nil
-}
-
 type OffchainAggregatorRequesterAccessControllerSetIterator struct {
 	Event *OffchainAggregatorRequesterAccessControllerSet
 
@@ -3542,20 +3170,16 @@ type ValidatorConfig struct {
 
 func (_OffchainAggregator *OffchainAggregator) ParseLog(log types.Log) (generated.AbigenLog, error) {
 	switch log.Topics[0] {
-	case _OffchainAggregator.abi.Events["AddedAccess"].ID:
-		return _OffchainAggregator.ParseAddedAccess(log)
 	case _OffchainAggregator.abi.Events["AnswerUpdated"].ID:
 		return _OffchainAggregator.ParseAnswerUpdated(log)
 	case _OffchainAggregator.abi.Events["BillingAccessControllerSet"].ID:
 		return _OffchainAggregator.ParseBillingAccessControllerSet(log)
 	case _OffchainAggregator.abi.Events["BillingSet"].ID:
 		return _OffchainAggregator.ParseBillingSet(log)
-	case _OffchainAggregator.abi.Events["CheckAccessDisabled"].ID:
-		return _OffchainAggregator.ParseCheckAccessDisabled(log)
-	case _OffchainAggregator.abi.Events["CheckAccessEnabled"].ID:
-		return _OffchainAggregator.ParseCheckAccessEnabled(log)
 	case _OffchainAggregator.abi.Events["ConfigSet"].ID:
 		return _OffchainAggregator.ParseConfigSet(log)
+	case _OffchainAggregator.abi.Events["NewIndexes"].ID:
+		return _OffchainAggregator.ParseNewIndexes(log)
 	case _OffchainAggregator.abi.Events["NewRound"].ID:
 		return _OffchainAggregator.ParseNewRound(log)
 	case _OffchainAggregator.abi.Events["NewTransmission"].ID:
@@ -3572,8 +3196,6 @@ func (_OffchainAggregator *OffchainAggregator) ParseLog(log types.Log) (generate
 		return _OffchainAggregator.ParsePayeeshipTransferred(log)
 	case _OffchainAggregator.abi.Events["PhbTokenSet"].ID:
 		return _OffchainAggregator.ParsePhbTokenSet(log)
-	case _OffchainAggregator.abi.Events["RemovedAccess"].ID:
-		return _OffchainAggregator.ParseRemovedAccess(log)
 	case _OffchainAggregator.abi.Events["RequesterAccessControllerSet"].ID:
 		return _OffchainAggregator.ParseRequesterAccessControllerSet(log)
 	case _OffchainAggregator.abi.Events["RoundRequested"].ID:
@@ -3584,10 +3206,6 @@ func (_OffchainAggregator *OffchainAggregator) ParseLog(log types.Log) (generate
 	default:
 		return nil, fmt.Errorf("abigen wrapper received unknown log topic: %v", log.Topics[0])
 	}
-}
-
-func (OffchainAggregatorAddedAccess) Topic() common.Hash {
-	return common.HexToHash("0x87286ad1f399c8e82bf0c4ef4fcdc570ea2e1e92176e5c848b6413545b885db4")
 }
 
 func (OffchainAggregatorAnswerUpdated) Topic() common.Hash {
@@ -3602,16 +3220,12 @@ func (OffchainAggregatorBillingSet) Topic() common.Hash {
 	return common.HexToHash("0xd0d9486a2c673e2a4b57fc82e4c8a556b3e2b82dd5db07e2c04a920ca0f469b6")
 }
 
-func (OffchainAggregatorCheckAccessDisabled) Topic() common.Hash {
-	return common.HexToHash("0x3be8a977a014527b50ae38adda80b56911c267328965c98ddc385d248f539638")
-}
-
-func (OffchainAggregatorCheckAccessEnabled) Topic() common.Hash {
-	return common.HexToHash("0xaebf329500988c6488a0074e5a0a9ff304561fc5c6fc877aeb1d59c8282c3480")
-}
-
 func (OffchainAggregatorConfigSet) Topic() common.Hash {
 	return common.HexToHash("0x25d719d88a4512dd76c7442b910a83360845505894eb444ef299409e180f8fb9")
+}
+
+func (OffchainAggregatorNewIndexes) Topic() common.Hash {
+	return common.HexToHash("0xa5b7a180a8791086230e78b9dea141f6c5584a943d2ecd202e75097c94ef125f")
 }
 
 func (OffchainAggregatorNewRound) Topic() common.Hash {
@@ -3646,10 +3260,6 @@ func (OffchainAggregatorPhbTokenSet) Topic() common.Hash {
 	return common.HexToHash("0xf06ee811278f05478a565968c049634e23f8ba01a1b757288393329929b22cef")
 }
 
-func (OffchainAggregatorRemovedAccess) Topic() common.Hash {
-	return common.HexToHash("0x3d68a6fce901d20453d1a7aa06bf3950302a735948037deb182a8db66df2a0d1")
-}
-
 func (OffchainAggregatorRequesterAccessControllerSet) Topic() common.Hash {
 	return common.HexToHash("0x27b89aede8b560578baaa25ee5ce3852c5eecad1e114b941bbd89e1eb4bae634")
 }
@@ -3669,8 +3279,6 @@ func (_OffchainAggregator *OffchainAggregator) Address() common.Address {
 type OffchainAggregatorInterface interface {
 	BillingAccessController(opts *bind.CallOpts) (common.Address, error)
 
-	CheckEnabled(opts *bind.CallOpts) (bool, error)
-
 	Decimals(opts *bind.CallOpts) (uint8, error)
 
 	Description(opts *bind.CallOpts) (string, error)
@@ -3681,6 +3289,8 @@ type OffchainAggregatorInterface interface {
 
 		error)
 
+	GetIndexes(opts *bind.CallOpts) ([]*big.Int, error)
+
 	GetPhbToken(opts *bind.CallOpts) (common.Address, error)
 
 	GetRoundData(opts *bind.CallOpts, _roundId *big.Int) (GetRoundData,
@@ -3689,7 +3299,7 @@ type OffchainAggregatorInterface interface {
 
 	GetTimestamp(opts *bind.CallOpts, _roundId *big.Int) (*big.Int, error)
 
-	HasAccess(opts *bind.CallOpts, _user common.Address, _calldata []byte) (bool, error)
+	IndexCount(opts *bind.CallOpts) (*big.Int, error)
 
 	LatestAnswer(opts *bind.CallOpts) (*big.Int, error)
 
@@ -3737,13 +3347,7 @@ type OffchainAggregatorInterface interface {
 
 	AcceptPayeeship(opts *bind.TransactOpts, _transmitter common.Address) (*types.Transaction, error)
 
-	AddAccess(opts *bind.TransactOpts, _user common.Address) (*types.Transaction, error)
-
-	DisableAccessCheck(opts *bind.TransactOpts) (*types.Transaction, error)
-
-	EnableAccessCheck(opts *bind.TransactOpts) (*types.Transaction, error)
-
-	RemoveAccess(opts *bind.TransactOpts, _user common.Address) (*types.Transaction, error)
+	RequestNewIndexes(opts *bind.TransactOpts) (*types.Transaction, error)
 
 	RequestNewRound(opts *bind.TransactOpts) (*types.Transaction, error)
 
@@ -3752,6 +3356,8 @@ type OffchainAggregatorInterface interface {
 	SetBillingAccessController(opts *bind.TransactOpts, _billingAccessController common.Address) (*types.Transaction, error)
 
 	SetConfig(opts *bind.TransactOpts, _signers []common.Address, _transmitters []common.Address, _threshold uint8, _encodedConfigVersion uint64, _encoded []byte) (*types.Transaction, error)
+
+	SetIndexCount(opts *bind.TransactOpts, count *big.Int) (*types.Transaction, error)
 
 	SetPayees(opts *bind.TransactOpts, _transmitters []common.Address, _payees []common.Address) (*types.Transaction, error)
 
@@ -3771,12 +3377,6 @@ type OffchainAggregatorInterface interface {
 
 	WithdrawPayment(opts *bind.TransactOpts, _transmitter common.Address) (*types.Transaction, error)
 
-	FilterAddedAccess(opts *bind.FilterOpts) (*OffchainAggregatorAddedAccessIterator, error)
-
-	WatchAddedAccess(opts *bind.WatchOpts, sink chan<- *OffchainAggregatorAddedAccess) (event.Subscription, error)
-
-	ParseAddedAccess(log types.Log) (*OffchainAggregatorAddedAccess, error)
-
 	FilterAnswerUpdated(opts *bind.FilterOpts, current []*big.Int, roundId []*big.Int) (*OffchainAggregatorAnswerUpdatedIterator, error)
 
 	WatchAnswerUpdated(opts *bind.WatchOpts, sink chan<- *OffchainAggregatorAnswerUpdated, current []*big.Int, roundId []*big.Int) (event.Subscription, error)
@@ -3795,23 +3395,17 @@ type OffchainAggregatorInterface interface {
 
 	ParseBillingSet(log types.Log) (*OffchainAggregatorBillingSet, error)
 
-	FilterCheckAccessDisabled(opts *bind.FilterOpts) (*OffchainAggregatorCheckAccessDisabledIterator, error)
-
-	WatchCheckAccessDisabled(opts *bind.WatchOpts, sink chan<- *OffchainAggregatorCheckAccessDisabled) (event.Subscription, error)
-
-	ParseCheckAccessDisabled(log types.Log) (*OffchainAggregatorCheckAccessDisabled, error)
-
-	FilterCheckAccessEnabled(opts *bind.FilterOpts) (*OffchainAggregatorCheckAccessEnabledIterator, error)
-
-	WatchCheckAccessEnabled(opts *bind.WatchOpts, sink chan<- *OffchainAggregatorCheckAccessEnabled) (event.Subscription, error)
-
-	ParseCheckAccessEnabled(log types.Log) (*OffchainAggregatorCheckAccessEnabled, error)
-
 	FilterConfigSet(opts *bind.FilterOpts) (*OffchainAggregatorConfigSetIterator, error)
 
 	WatchConfigSet(opts *bind.WatchOpts, sink chan<- *OffchainAggregatorConfigSet) (event.Subscription, error)
 
 	ParseConfigSet(log types.Log) (*OffchainAggregatorConfigSet, error)
+
+	FilterNewIndexes(opts *bind.FilterOpts) (*OffchainAggregatorNewIndexesIterator, error)
+
+	WatchNewIndexes(opts *bind.WatchOpts, sink chan<- *OffchainAggregatorNewIndexes) (event.Subscription, error)
+
+	ParseNewIndexes(log types.Log) (*OffchainAggregatorNewIndexes, error)
 
 	FilterNewRound(opts *bind.FilterOpts, roundId []*big.Int, startedBy []common.Address) (*OffchainAggregatorNewRoundIterator, error)
 
@@ -3860,12 +3454,6 @@ type OffchainAggregatorInterface interface {
 	WatchPhbTokenSet(opts *bind.WatchOpts, sink chan<- *OffchainAggregatorPhbTokenSet, _oldPhbToken []common.Address, _newPhbToken []common.Address) (event.Subscription, error)
 
 	ParsePhbTokenSet(log types.Log) (*OffchainAggregatorPhbTokenSet, error)
-
-	FilterRemovedAccess(opts *bind.FilterOpts) (*OffchainAggregatorRemovedAccessIterator, error)
-
-	WatchRemovedAccess(opts *bind.WatchOpts, sink chan<- *OffchainAggregatorRemovedAccess) (event.Subscription, error)
-
-	ParseRemovedAccess(log types.Log) (*OffchainAggregatorRemovedAccess, error)
 
 	FilterRequesterAccessControllerSet(opts *bind.FilterOpts) (*OffchainAggregatorRequesterAccessControllerSetIterator, error)
 

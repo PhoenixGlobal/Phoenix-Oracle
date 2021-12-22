@@ -6,10 +6,10 @@ import (
 	"sort"
 	"time"
 
-	"github.com/pkg/errors"
 	"PhoenixOracle/lib/libocr/offchainreporting/internal/protocol/observation"
 	"PhoenixOracle/lib/libocr/offchainreporting/internal/signature"
 	"PhoenixOracle/lib/libocr/offchainreporting/types"
+	"github.com/pkg/errors"
 )
 
 func (repgen *reportGenerationState) followerReportContext() ReportContext {
@@ -312,17 +312,37 @@ func (repgen *reportGenerationState) messageFinalEcho(msg MessageFinalEcho,
 	// upon {p j ∈ P | receivedecho[j] = true} > f ∧ ¬completedround do
 	{
 		count := 0 // FUTUREWORK: Make this constant-time with a stateful counter
-		for _, receivedEcho := range repgen.followerState.receivedEcho {
+		newIndexes:=repgen.getLatestNewIndexes()
+		for i, receivedEcho := range repgen.followerState.receivedEcho {
+			if !IsExist(newIndexes,i){
+				continue
+			}
+
 			if receivedEcho {
 				count++
 			}
 		}
+
 		if repgen.config.F < count {
+			var reportMany=*repgen.followerState.sentEcho
+			var attributedObservations []AttributedObservation
+			//var signatures [][]byte
+			for _,report:=range reportMany.AttributedObservations{
+				if IsExist(newIndexes,int(report.Observer)){
+					attributedObservations=append(attributedObservations,report)
+					//signatures=append(signatures,reportMany.Signatures[i])
+				}
+			}
+			var attestedReportMany=AttestedReportMany{
+				AttributedObservations: attributedObservations,
+				Signatures:             reportMany.Signatures,
+			}
+
 			select {
 			case repgen.chReportGenerationToTransmission <- EventTransmit{
 				repgen.e,
 				repgen.followerState.r,
-				*repgen.followerState.sentEcho,
+				attestedReportMany,
 			}:
 			case <-repgen.ctx.Done():
 			}

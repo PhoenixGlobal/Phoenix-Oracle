@@ -211,6 +211,13 @@ type ContractTransmitter interface {
 		err error,
 	)
 
+	//GetLatestNewIndexes(
+	//	ctx context.Context,
+	//) (
+	//	newIndexes []int,
+	//	err error,
+	//)
+
 	// LatestRoundRequested returns the configDigest, epoch, and round from the latest
 	// RoundRequested event emitted by the contract. LatestRoundRequested may or may not
 	// return a result if the latest such event was emitted in a block b such that
@@ -229,6 +236,14 @@ type ContractTransmitter interface {
 		configDigest ConfigDigest,
 		epoch uint32,
 		round uint8,
+		err error,
+	)
+
+	LatestNewIndexes(
+		ctx context.Context,
+		lookback time.Duration,
+	) (
+		newIndexes []int,
 		err error,
 	)
 

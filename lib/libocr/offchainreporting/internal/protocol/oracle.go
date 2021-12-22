@@ -169,9 +169,13 @@ func (o *oracleState) run() {
 	for {
 		select {
 		case msg := <-chNet:
-			msg.Msg.process(o, msg.Sender)
+			if o.shouldRun(){
+				msg.Msg.process(o, msg.Sender)
+			}
 		case epoch := <-chPacemakerToOracle:
-			o.epochChanged(epoch)
+			if o.shouldRun(){
+				o.epochChanged(epoch)
+			}
 		case <-chDone:
 		}
 
@@ -253,4 +257,45 @@ func (o *oracleState) reportGenerationMessage(msg MessageToReportGeneration, sen
 			"msg":    msg,
 		})
 	}
+}
+
+
+//judge whether the OracleID is in newIndexes or not.If not,it shouldn't run.
+func (o *oracleState) shouldRun() bool {
+	var resultNewIndexes struct {
+		newIndexes []int
+		err          error
+	}
+	ok := o.subprocesses.BlockForAtMost(o.ctx, o.localConfig.BlockchainTimeout,
+		func(ctx context.Context) {
+			resultNewIndexes.newIndexes, resultNewIndexes.err =
+				o.contractTransmitter.LatestNewIndexes(
+					ctx,
+					o.Config.DeltaC,
+				)
+		},
+	)
+	if !ok {
+		o.logger.Error("oracleState shouldRun: blockchain interaction timed out, returning true", types.LogFields{
+			"id":  				 o.id,
+			"timeout":           o.localConfig.BlockchainTimeout,
+		})
+		return true
+	}
+	if IsExist(resultNewIndexes.newIndexes,int(o.id)){
+		return true
+	}
+	return false
+}
+
+func IsExist(array []int,a int)bool {
+	if len(array)==0{
+		return true
+	}
+	for _,i:=range array{
+		if a==i{
+			return true
+		}
+	}
+	return false
 }

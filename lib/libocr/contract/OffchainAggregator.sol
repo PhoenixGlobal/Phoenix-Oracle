@@ -53,6 +53,11 @@ contract OffchainAggregator is Owned, OffchainAggregatorBilling, AggregatorV2V3I
   uint32 internal s_latestConfigBlockNumber; // makes it easier for offchain systems
                                              // to extract config from logs.
 
+  uint[] internal s_initIndexes;
+  uint[] internal s_newIndexes;
+  uint[] internal s_oldIndexes;
+  uint   internal s_indexCount;
+
   // Lowest answer the system is allowed to report in response to transmissions
   int192 immutable public minAnswer;
   // Highest answer the system is allowed to report in response to transmissions
@@ -178,6 +183,7 @@ contract OffchainAggregator is Owned, OffchainAggregatorBilling, AggregatorV2V3I
       delete s_oracles[transmitter];
       s_signers.pop();
       s_transmitters.pop();
+      s_initIndexes.pop();
     }
 
     for (uint i = 0; i < _signers.length; i++) { // add new signer/transmitter addresses
@@ -194,7 +200,14 @@ contract OffchainAggregator is Owned, OffchainAggregatorBilling, AggregatorV2V3I
       s_oracles[_transmitters[i]] = Oracle(uint8(i), Role.Transmitter);
       s_signers.push(_signers[i]);
       s_transmitters.push(_transmitters[i]);
+      s_initIndexes.push(i);
     }
+
+    s_indexCount=_signers.length-_signers.length/3;
+    if(s_indexCount<4){
+      s_indexCount=4;
+    }
+
     s_hotVars.threshold = _threshold;
     uint32 previousConfigBlockNumber = s_latestConfigBlockNumber;
     s_latestConfigBlockNumber = uint32(block.number);
@@ -212,6 +225,10 @@ contract OffchainAggregator is Owned, OffchainAggregatorBilling, AggregatorV2V3I
       );
       s_hotVars.latestEpochAndRound = 0;
     }
+
+    s_newIndexes=s_initIndexes;
+    changeIndexes();
+
     emit ConfigSet(
       previousConfigBlockNumber,
       configCount,
@@ -425,6 +442,89 @@ contract OffchainAggregator is Owned, OffchainAggregatorBilling, AggregatorV2V3I
   }
 
   /*
+   * requestNewIndexes logic
+   */
+
+  /**
+   * @notice emitted to immediately request new Indexes
+   */
+  event NewIndexes(uint[] oldIndexes,uint[] newIndexes);
+
+  function setIndexCount(uint count) external{
+    require(count>=4, "Count must be no less than 4");
+    require(count<=s_transmitters.length , "Count must be no more than the length of transmitters");
+    s_indexCount=count;
+    return;
+  }
+
+  function indexCount() external view returns(uint)
+  {
+    return s_indexCount;
+  }
+
+  /**
+   * @notice immediately requests new Indexes
+   * @return newIndexes the new Indexes.
+   */
+  function requestNewIndexes() external returns (uint[] memory) {
+    require(msg.sender == owner || s_requesterAccessController.hasAccess(msg.sender, msg.data),
+      "Only owner&requester can call");
+
+    changeIndexes();
+    return s_newIndexes;
+  }
+
+  function changeIndexes() internal returns (uint[] memory){
+    s_oldIndexes=s_newIndexes;
+    s_newIndexes=s_initIndexes;
+
+    uint index;
+    uint excludeCount=s_transmitters.length-s_indexCount;
+    for (uint i = 0; i < excludeCount; i++) {
+      index=rand(s_newIndexes.length);
+      remove(index);
+    }
+    emit NewIndexes(s_oldIndexes,s_newIndexes);
+    return s_newIndexes;
+  }
+
+  /**
+   * @notice get a rand number
+   * @return a number within _length
+   */
+  function rand(uint _length) internal returns(uint) {
+    uint random = uint(keccak256(abi.encodePacked(block.difficulty, block.timestamp)));
+    return random%_length;
+  }
+
+  /**
+   * @notice remove a index value from s_newIndexes
+   * @return array
+   */
+  function remove(uint index)  internal returns(uint[] memory) {
+    if (index >= s_newIndexes.length) return s_newIndexes;
+
+    for (uint i = index; i<s_newIndexes.length-1; i++){
+      s_newIndexes[i] = s_newIndexes[i+1];
+    }
+    s_newIndexes.pop();
+    return s_newIndexes;
+  }
+
+  /**
+   * @return indexes of transmitters selected to transmit reports to this contract
+
+   * @dev The list of indexes will match the indexes used to specify the transmitter during setConfig
+   */
+  function getIndexes()
+  external
+  view
+  returns(uint[] memory)
+  {
+    return s_newIndexes;
+  }
+
+  /*
    * Transmission logic
    */
 
@@ -525,6 +625,19 @@ contract OffchainAggregator is Owned, OffchainAggregatorBilling, AggregatorV2V3I
       0; // placeholder
   }
 
+  function isInIndexes(uint index) internal returns(bool){
+    bool isIn=false;
+    for (uint8 i = 0; i < s_newIndexes.length; i++) {
+      if(index==s_newIndexes[i]){
+        isIn=true;
+        break;
+      }
+    }
+    return isIn;
+  }
+
+  event TransmitterIndex(uint index);
+
   /**
    * @notice transmit is called to post a new report to the contract
    * @param _report serialized report, which the signatures are signing. See parsing code below for format. The ith element of the observers component must be the index in s_signers of the address for the ith signature
@@ -540,6 +653,13 @@ contract OffchainAggregator is Owned, OffchainAggregatorBilling, AggregatorV2V3I
   )
     external
   {
+    //judge whether the index of sender is int the s_newIndexes
+    {
+      Oracle memory s_transmitter = s_oracles[msg.sender];
+      emit  TransmitterIndex(s_transmitter.index);
+      require(isInIndexes(s_transmitter.index), "the index of transmitter is not in s_newIndexes");
+    }
+
     uint256 initialGas = gasleft(); // This line must come first
     // Make sure the transmit message-length matches the inputs. Otherwise, the
     // transmitter could append an arbitrarily long (up to gas-block limit)
@@ -602,6 +722,9 @@ contract OffchainAggregator is Owned, OffchainAggregatorBilling, AggregatorV2V3I
         uint8 observerIdx = uint8(rawObservers[i]);
         require(!seen[observerIdx], "observer index repeated");
         seen[observerIdx] = true;
+
+        require(isInIndexes(observerIdx), "the index of observer is not in s_newIndexes");
+
         r.observers[i] = rawObservers[i];
       }
 
@@ -641,6 +764,8 @@ contract OffchainAggregator is Owned, OffchainAggregatorBilling, AggregatorV2V3I
       r.hotVars.latestAggregatorRoundId++;
       s_transmissions[r.hotVars.latestAggregatorRoundId] =
         Transmission(median, uint64(block.timestamp));
+
+      changeIndexes();
 
       emit NewTransmission(
         r.hotVars.latestAggregatorRoundId,

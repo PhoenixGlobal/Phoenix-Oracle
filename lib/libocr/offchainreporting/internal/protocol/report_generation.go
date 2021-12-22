@@ -141,13 +141,23 @@ func (repgen *reportGenerationState) run() {
 	// Event Loop
 	chDone := repgen.ctx.Done()
 	for {
+		if repgen.shouldChangeLeader(){
+			repgen.completeRound()
+		}
+
 		select {
 		case msg := <-repgen.chNetToReportGeneration:
-			msg.msg.processReportGeneration(repgen, msg.sender)
+			if repgen.shouldRun(){
+				msg.msg.processReportGeneration(repgen, msg.sender)
+			}
 		case <-repgen.leaderState.tGrace:
-			repgen.eventTGraceTimeout()
+			if repgen.shouldRun(){
+				repgen.eventTGraceTimeout()
+			}
 		case <-repgen.leaderState.tRound:
-			repgen.eventTRoundTimeout()
+			if repgen.shouldRun(){
+				repgen.eventTRoundTimeout()
+			}
 		case <-chDone:
 		}
 
@@ -162,4 +172,46 @@ func (repgen *reportGenerationState) run() {
 		default:
 		}
 	}
+}
+
+func(repgen *reportGenerationState) getLatestNewIndexes() []int {
+	var resultNewIndexes struct {
+		newIndexes []int
+		err          error
+	}
+	ok := repgen.subprocesses.BlockForAtMost(repgen.ctx, repgen.localConfig.BlockchainTimeout,
+		func(ctx context.Context) {
+			resultNewIndexes.newIndexes, resultNewIndexes.err =
+				repgen.contractTransmitter.LatestNewIndexes(
+					ctx,
+					repgen.config.DeltaC,
+				)
+		},
+	)
+	if !ok {
+		repgen.logger.Error("reportGenerationState getLatestNewIndexes: blockchain interaction timed out, returning true", types.LogFields{
+			"round":             repgen.followerState.r,
+			"timeout":           repgen.localConfig.BlockchainTimeout,
+			"err":               resultNewIndexes.err,
+		})
+	}
+	return resultNewIndexes.newIndexes
+}
+
+//judge whether the OracleID is in newIndexes or not.If not,it shouldn't run.
+func (repgen *reportGenerationState) shouldRun() bool {
+	newIndexes:=repgen.getLatestNewIndexes()
+	if IsExist(newIndexes,int(repgen.id)){
+		return true
+	}
+	return false
+}
+
+//judge whether the OracleID of Leader is in newIndexes or not.If not,it should change leader.
+func (repgen *reportGenerationState) shouldChangeLeader() bool {
+	newIndexes:=repgen.getLatestNewIndexes()
+	if IsExist(newIndexes,int(repgen.l)){
+		return false
+	}
+	return true
 }

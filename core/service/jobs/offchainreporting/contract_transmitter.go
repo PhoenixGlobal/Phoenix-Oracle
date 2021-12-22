@@ -82,3 +82,32 @@ func (oc *OCRContractTransmitter) ChainID() *big.Int {
 func (oc *OCRContractTransmitter) LatestRoundRequested(ctx context.Context, lookback time.Duration) (configDigest ocrtypes.ConfigDigest, epoch uint32, round uint8, err error) {
 	return oc.tracker.LatestRoundRequested(ctx, lookback)
 }
+
+func (oc *OCRContractTransmitter) LatestNewIndexes(ctx context.Context, lookback time.Duration) (newIndexes []int,err error) {
+	newIndexes,err=oc.tracker.LatestNewIndexes(ctx, lookback)
+	if err!=nil{
+		return
+	}
+	if len(newIndexes)==0{
+		newIndexes,err=oc.GetLatestNewIndexes(ctx)
+		if err!=nil{
+			return
+		}
+		oc.tracker.SetNewIndexes(newIndexes)
+		return
+	}
+	return
+}
+
+func (oc *OCRContractTransmitter) GetLatestNewIndexes(ctx context.Context) (newIndexes []int,err error) {
+	opts := bind.CallOpts{Context: ctx, Pending: false}
+	result, err := oc.contractCaller.GetIndexes(&opts)
+	if err != nil {
+		return newIndexes, errors.Wrap(err, "error getting GetIndexes")
+	}
+	for _,index:=range result{
+		index64:=index.Int64()
+		newIndexes=append(newIndexes,int(index64))
+	}
+	return newIndexes, nil
+}

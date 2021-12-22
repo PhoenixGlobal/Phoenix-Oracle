@@ -29,6 +29,7 @@ import (
 	gethCommon "github.com/ethereum/go-ethereum/common"
 	gethTypes "github.com/ethereum/go-ethereum/core/types"
 	"github.com/pkg/errors"
+	"math/big"
 )
 
 const configMailboxSanityLimit = 100
@@ -40,6 +41,7 @@ var (
 
 	OCRContractConfigSet            = getEventTopic("ConfigSet")
 	OCRContractLatestRoundRequested = getEventTopic("RoundRequested")
+	OCRContractNewIndexes           = getEventTopic("NewIndexes")
 )
 
 type (
@@ -69,6 +71,9 @@ type (
 		latestRoundRequested offchainaggregator.OffchainAggregatorRoundRequested
 		lrrMu                sync.RWMutex
 
+		newIndexes           offchainaggregator.OffchainAggregatorNewIndexes
+		niMu                 sync.RWMutex
+
 		configsMB utils.Mailbox
 		chConfigs chan ocrtypes.ContractConfig
 
@@ -80,6 +85,7 @@ type (
 		SaveLatestRoundRequested(tx *sql.Tx, rr offchainaggregator.OffchainAggregatorRoundRequested) error
 		LoadLatestRoundRequested() (rr offchainaggregator.OffchainAggregatorRoundRequested, err error)
 	}
+
 )
 
 func NewOCRContractTracker(
@@ -117,6 +123,8 @@ func NewOCRContractTracker(
 		nil,
 		offchainaggregator.OffchainAggregatorRoundRequested{},
 		sync.RWMutex{},
+		offchainaggregator.OffchainAggregatorNewIndexes{},
+		sync.RWMutex{},
 		*utils.NewMailbox(configMailboxSanityLimit),
 		make(chan ocrtypes.ContractConfig),
 		-1,
@@ -137,6 +145,7 @@ func (t *OCRContractTracker) Start() error {
 			LogsWithTopics: map[gethCommon.Hash][][]log.Topic{
 				offchain_aggregator_wrapper.OffchainAggregatorRoundRequested{}.Topic(): nil,
 				offchain_aggregator_wrapper.OffchainAggregatorConfigSet{}.Topic():      nil,
+				offchain_aggregator_wrapper.OffchainAggregatorNewIndexes{}.Topic():     nil,
 			},
 			NumConfirmations: 1,
 		})
@@ -279,6 +288,22 @@ func (t *OCRContractTracker) HandleLog(lb log.Broadcast) {
 		} else {
 			t.logger.Warnw("OCRContractTracker: ignoring out of date RoundRequested event", "latestRoundRequested", t.latestRoundRequested, "roundRequested", rr)
 		}
+	case OCRContractNewIndexes:
+		var ni *offchainaggregator.OffchainAggregatorNewIndexes
+		ni, err = t.contractFilterer.ParseNewIndexes(raw)
+		if err != nil {
+			t.logger.Errorw("could not parse new indexes", "err", err)
+			t.logger.ErrorIfCalling(func() error { return t.logBroadcaster.MarkConsumed(t.gdb, lb) })
+			return
+		}
+		if IsLaterThan(raw, t.newIndexes.Raw) {
+			t.niMu.Lock()
+			t.newIndexes = *ni
+			t.niMu.Unlock()
+			t.logger.Infow("OCRContractTracker: received new latest new NewIndexes event", "newIndexes", *ni)
+		} else {
+			t.logger.Warnw("OCRContractTracker: ignoring out of date NewIndexes event", "newIndexes", t.newIndexes, "NewIndexes", ni)
+		}
 	default:
 		logger.Debugw("OCRContractTracker: got unrecognised log topic", "topic", topics[0])
 	}
@@ -388,6 +413,30 @@ func (t *OCRContractTracker) LatestRoundRequested(_ context.Context, lookback ti
 	t.lrrMu.RLock()
 	defer t.lrrMu.RUnlock()
 	return t.latestRoundRequested.ConfigDigest, t.latestRoundRequested.Epoch, t.latestRoundRequested.Round, nil
+}
+
+func (t *OCRContractTracker) LatestNewIndexes(_ context.Context, lookback time.Duration) (newIndexes []int,err error){
+	t.niMu.RLock()
+	defer t.niMu.RUnlock()
+	indexes:=t.newIndexes.NewIndexes
+	for _,index:=range indexes{
+		index64:=index.Int64()
+		newIndexes=append(newIndexes,int(index64))
+	}
+	return newIndexes, nil
+}
+
+func (t *OCRContractTracker) SetNewIndexes(newIndexes []int){
+	t.niMu.RLock()
+	defer t.niMu.RUnlock()
+	var NewIndexes []*big.Int
+
+	for _,index:=range newIndexes{
+		bigIndex:=big.NewInt(int64(index))
+		NewIndexes=append(NewIndexes,bigIndex)
+	}
+	t.newIndexes.NewIndexes=NewIndexes
+	return
 }
 
 func getEventTopic(name string) gethCommon.Hash {
