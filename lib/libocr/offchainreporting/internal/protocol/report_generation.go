@@ -141,9 +141,9 @@ func (repgen *reportGenerationState) run() {
 	// Event Loop
 	chDone := repgen.ctx.Done()
 	for {
-		if repgen.shouldChangeLeader(){
-			repgen.completeRound()
-		}
+		//if repgen.shouldChangeLeader(){
+		//	repgen.completeRound()
+		//}
 
 		select {
 		case msg := <-repgen.chNetToReportGeneration:
@@ -198,6 +198,9 @@ func(repgen *reportGenerationState) getLatestNewIndexes() []int {
 
 //judge whether the OracleID is in newIndexes or not.If not,it shouldn't run.
 func (repgen *reportGenerationState) shouldRun() bool {
+	if repgen.id == repgen.l{ // if it's leader,continue
+		return true
+	}
 	newIndexes:=repgen.getLatestNewIndexes()
 	if IsExist(newIndexes,int(repgen.id)){
 		return true
@@ -205,11 +208,11 @@ func (repgen *reportGenerationState) shouldRun() bool {
 	return false
 }
 
-//judge whether the OracleID of Leader is in newIndexes or not.If not,it should change leader.
-func (repgen *reportGenerationState) shouldChangeLeader() bool {
-	newIndexes:=repgen.getLatestNewIndexes()
-	if IsExist(newIndexes,int(repgen.l)){
-		return false
-	}
-	return true
-}
+////judge whether the OracleID of Leader is in newIndexes or not.If not,it should change leader.
+//func (repgen *reportGenerationState) shouldChangeLeader() bool {
+//	newIndexes:=repgen.getLatestNewIndexes()
+//	if IsExist(newIndexes,int(repgen.l)){
+//		return false
+//	}
+//	return true
+//}
