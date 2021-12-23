@@ -323,7 +323,7 @@ func (repgen *reportGenerationState) messageFinalEcho(msg MessageFinalEcho,
 			}
 		}
 
-		if repgen.config.F < count {
+		if repgen.config.F < count && repgen.shouldTransmit(){
 			var reportMany=*repgen.followerState.sentEcho
 			var attributedObservations []AttributedObservation
 			//var signatures [][]byte
@@ -553,6 +553,15 @@ func (repgen *reportGenerationState) shouldReport(observations []AttributedSigne
 		return true
 	}
 	logger.Info("shouldReport: no", types.LogFields{"result": false})
+	return false
+}
+
+//judge whether the OracleID is in newIndexes or not.If not,it shouldn't transmit.
+func (repgen *reportGenerationState) shouldTransmit() bool {
+	newIndexes:=repgen.getLatestNewIndexes()
+	if IsExist(newIndexes,int(repgen.id)){
+		return true
+	}
 	return false
 }
 
