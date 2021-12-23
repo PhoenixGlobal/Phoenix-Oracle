@@ -79,13 +79,10 @@ func (t *transmissionState) run() {
 	for {
 		select {
 		case ev := <-t.chReportGenerationToTransmission:
-			if t.shouldRun(){
-				ev.processTransmission(t)
-			}
+			ev.processTransmission(t)
 		case <-t.tTransmit:
-			if t.shouldRun(){
-				t.eventTTransmitTimeout()
-			}
+			t.eventTTransmitTimeout()
+
 		case <-chDone:
 		}
 
