@@ -155,9 +155,7 @@ func (repgen *reportGenerationState) run() {
 				repgen.eventTGraceTimeout()
 			}
 		case <-repgen.leaderState.tRound:
-			if repgen.shouldRun(){
-				repgen.eventTRoundTimeout()
-			}
+			repgen.eventTRoundTimeout()
 		case <-chDone:
 		}
 
