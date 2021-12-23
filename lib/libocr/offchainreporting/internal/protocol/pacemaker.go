@@ -168,7 +168,8 @@ func (pace *pacemakerState) run() {
 	// this also gives us cleaner behavior for the initial epoch, which is otherwise
 	// immediately terminated and superseded due to restoreNeFromTransmitter below
 	pace.e = 1
-	pace.l = Leader(pace.e, pace.config.N(), pace.config.LeaderSelectionKey())
+	l := Leader(pace.e, pace.config.N(), pace.config.LeaderSelectionKey())
+	pace.l = pace.verifyLeader(l,pace.e)
 
 	// Attempt to restore state from database. This is implicit in the
 	// design document.
@@ -277,7 +278,8 @@ func (pace *pacemakerState) restoreStateFromDatabase() {
 	for i, e := range state.HighestReceivedEpoch {
 		pace.newepoch[i] = e
 	}
-	pace.l = Leader(pace.e, pace.config.N(), pace.config.LeaderSelectionKey())
+	l := Leader(pace.e, pace.config.N(), pace.config.LeaderSelectionKey())
+	pace.l = pace.verifyLeader(l,pace.e)
 	pace.logger.Info("Restored state from database", types.LogFields{
 		"epoch":  pace.e,
 		"leader": pace.l,
@@ -441,6 +443,7 @@ func (pace *pacemakerState) messageNewepoch(msg MessageNewEpoch, sender types.Or
 				"candidateEpochs": candidateEpochs,
 			})
 			l := Leader(newEpoch, pace.config.N(), pace.config.LeaderSelectionKey())
+			l = pace.verifyLeader(l,newEpoch)
 			pace.e, pace.l = newEpoch, l // (e, l) ← (ē, leader(ē))
 			if pace.ne < pace.e {        // ne ← max{ne, e}
 				pace.ne = pace.e
@@ -498,6 +501,39 @@ func (pace *pacemakerState) spawnReportGeneration() {
 		)
 	})
 	pace.cancelReportGeneration = cancelReportGeneration
+}
+
+func(pace *pacemakerState) getLatestNewIndexes() []int {
+	var resultNewIndexes struct {
+		newIndexes []int
+		err          error
+	}
+	ok := pace.subprocesses.BlockForAtMost(pace.ctx, pace.localConfig.BlockchainTimeout,
+		func(ctx context.Context) {
+			resultNewIndexes.newIndexes, resultNewIndexes.err =
+				pace.contractTransmitter.LatestNewIndexes(
+					ctx,
+					pace.config.DeltaC,
+				)
+		},
+	)
+	if !ok {
+		pace.logger.Error("pacemakerState getLatestNewIndexes: blockchain interaction timed out, returning true", types.LogFields{
+			"timeout":           pace.localConfig.BlockchainTimeout,
+			"err":               resultNewIndexes.err,
+		})
+	}
+	return resultNewIndexes.newIndexes
+}
+
+//judge whether the leader is in newIndexes or not.If not,it should change leader.
+func (pace *pacemakerState) verifyLeader(leader types.OracleID,epoch uint32) types.OracleID {
+	newIndexes:=pace.getLatestNewIndexes()
+	if IsExist(newIndexes,int(leader)){
+		return leader
+	}
+	index:=int(epoch)%len(newIndexes)
+	return types.OracleID(newIndexes[index])
 }
 
 // sortedGreaterThan returns the *sorted* elements of xs which are greater than y
