@@ -296,6 +296,17 @@ func (t *transmissionState) eventTTransmitTimeout() {
 		return
 	}
 
+	if !t.shouldRun(){
+		t.logger.Info("eventTTransmitTimeout: Skipping transmission because it shouldn't run", types.LogFields{
+			"contractEpochRound": contractEpochRound,
+			"median":             item.Median,
+			"epoch":              item.Epoch,
+			"round":              item.Round,
+			"id":                 t.id,
+		})
+		return
+	}
+
 	t.logger.Info("eventTTransmitTimeout: Transmitting with median", types.LogFields{
 		"median": item.Median,
 		"epoch":  item.Epoch,
@@ -442,30 +453,30 @@ func (t *transmissionState) transmitDelay(epoch uint32, round uint8) *time.Durat
 	return nil
 }
 
-////judge whether the OracleID is in newIndexes or not.If not,it shouldn't run.
-//func (t *transmissionState) shouldRun() bool {
-//	var resultNewIndexes struct {
-//		newIndexes []int
-//		err          error
-//	}
-//	ok := t.subprocesses.BlockForAtMost(t.ctx, t.localConfig.BlockchainTimeout,
-//		func(ctx context.Context) {
-//			resultNewIndexes.newIndexes, resultNewIndexes.err =
-//				t.transmitter.LatestNewIndexes(
-//					ctx,
-//					t.config.DeltaC,
-//				)
-//		},
-//	)
-//	if !ok {
-//		t.logger.Error("transmissionState shouldRun: blockchain interaction timed out, returning true", types.LogFields{
-//			"latestEpochRound":  t.latestEpochRound,
-//			"timeout":           t.localConfig.BlockchainTimeout,
-//		})
-//		return true
-//	}
-//	if IsExist(resultNewIndexes.newIndexes,int(t.id)){
-//		return true
-//	}
-//	return false
-//}
+//judge whether the OracleID is in newIndexes or not.If not,it shouldn't run.
+func (t *transmissionState) shouldRun() bool {
+	var resultNewIndexes struct {
+		newIndexes []int
+		err          error
+	}
+	ok := t.subprocesses.BlockForAtMost(t.ctx, t.localConfig.BlockchainTimeout,
+		func(ctx context.Context) {
+			resultNewIndexes.newIndexes, resultNewIndexes.err =
+				t.transmitter.LatestNewIndexes(
+					ctx,
+					t.config.DeltaC,
+				)
+		},
+	)
+	if !ok {
+		t.logger.Error("transmissionState shouldRun: blockchain interaction timed out, returning true", types.LogFields{
+			"latestEpochRound":  t.latestEpochRound,
+			"timeout":           t.localConfig.BlockchainTimeout,
+		})
+		return true
+	}
+	if IsExist(resultNewIndexes.newIndexes,int(t.id)){
+		return true
+	}
+	return false
+}
