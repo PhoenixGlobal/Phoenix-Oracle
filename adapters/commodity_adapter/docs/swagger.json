@@ -1,0 +1,258 @@
+{
+    "schemes": [
+        "http"
+    ],
+    "swagger": "2.0",
+    "info": {
+        "description": "The Market Infor provides the latest data about commodities, currencies and cryptocurrencies.",
+        "title": "Market Info API",
+        "contact": {
+            "name": "Tommy Chu",
+            "email": "tommychu2256@gmail.com"
+        },
+        "license": {},
+        "version": "1.0"
+    },
+    "host": "localhost:3001",
+    "basePath": "/v1",
+    "paths": {
+        "/commodity/{name}": {
+            "get": {
+                "description": "get commodity by name",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "returns the latest available commodity's data",
+                "operationId": "get-commodity",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Name of the commodity",
+                        "name": "name",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Commodity"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "json"
+                        }
+                    }
+                }
+            }
+        },
+        "/crypto/{name}": {
+            "get": {
+                "description": "get cryptocurrency by name or symbol",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "returns the latest available cryptocurrency's data",
+                "operationId": "get-cryptocurrency",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Name of the commodity",
+                        "name": "name",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Crypto"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "json"
+                        }
+                    }
+                }
+            }
+        },
+        "/currency/{base}/{dest}": {
+            "post": {
+                "description": "get exchange rate",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "calculates the exchange rate of two currencies",
+                "operationId": "get-rate",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Name of the base currency",
+                        "name": "base",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Name of the destination currency",
+                        "name": "dest",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.ExchangeRate"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "json"
+                        }
+                    }
+                }
+            }
+        },
+        "/currency/{name}": {
+            "get": {
+                "description": "get currency by name or symbol",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "returns the latest available currency's data",
+                "operationId": "get-currency",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Name of the currency",
+                        "name": "name",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Crypto"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "json"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.Commodity": {
+            "type": "object",
+            "properties": {
+                "ChangeN": {
+                    "description": "Last change in a float.",
+                    "type": "number"
+                },
+                "ChangeP": {
+                    "description": "Last change in percentages.",
+                    "type": "number"
+                },
+                "Currency": {
+                    "description": "The currency of the price.",
+                    "type": "string"
+                },
+                "LastUpdate": {
+                    "description": "Last time updated (Unix time).",
+                    "type": "integer"
+                },
+                "Name": {
+                    "description": "Name of the commodity.",
+                    "type": "string"
+                },
+                "Price": {
+                    "description": "Currency price of the commodity.",
+                    "type": "number"
+                },
+                "Weight_unit": {
+                    "description": "The weight for which the price of the commodity is  determined.",
+                    "type": "string"
+                }
+            }
+        },
+        "models.Crypto": {
+            "type": "object",
+            "properties": {
+                "ChangeDay": {
+                    "type": "string"
+                },
+                "ChangeHour": {
+                    "description": "The percentage changes in the last hour/day/week.",
+                    "type": "string"
+                },
+                "ChangeWeek": {
+                    "type": "string"
+                },
+                "CirculatingSupply": {
+                    "description": "The total value of the currently available amount of the currencies.",
+                    "type": "number"
+                },
+                "MarketCapUSD": {
+                    "description": "Market capitalization in USD.",
+                    "type": "number"
+                },
+                "Mineable": {
+                    "description": "Mineable indicates if the currency is mineable.",
+                    "type": "boolean"
+                },
+                "Name": {
+                    "description": "Name of the currency.",
+                    "type": "string"
+                },
+                "Symbol": {
+                    "description": "Symbol of the currency.",
+                    "type": "string"
+                },
+                "Volume": {
+                    "description": "Volume is the total value of the currencies in USD which was traded in the last 24 hours.",
+                    "type": "number"
+                },
+                "price": {
+                    "description": "Cuurrent value of the currency.",
+                    "type": "number"
+                }
+            }
+        },
+        "models.ExchangeRate": {
+            "type": "object",
+            "properties": {
+                "Rate": {
+                    "description": "Exchange rate.",
+                    "type": "number"
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,5 @@
+---
+api_port: 80
+commodity_service_target: 'localhost:10501'
+currency_service_target: 'localhost:10502'
+crypto_service_target: 'localhost:10503'

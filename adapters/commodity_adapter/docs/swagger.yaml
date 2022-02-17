@@ -1,0 +1,177 @@
+basePath: /v1
+definitions:
+  models.Commodity:
+    properties:
+      ChangeN:
+        description: Last change in a float.
+        type: number
+      ChangeP:
+        description: Last change in percentages.
+        type: number
+      Currency:
+        description: The currency of the price.
+        type: string
+      LastUpdate:
+        description: Last time updated (Unix time).
+        type: integer
+      Name:
+        description: Name of the commodity.
+        type: string
+      Price:
+        description: Currency price of the commodity.
+        type: number
+      Weight_unit:
+        description: The weight for which the price of the commodity is  determined.
+        type: string
+    type: object
+  models.Crypto:
+    properties:
+      ChangeDay:
+        type: string
+      ChangeHour:
+        description: The percentage changes in the last hour/day/week.
+        type: string
+      ChangeWeek:
+        type: string
+      CirculatingSupply:
+        description: The total value of the currently available amount of the currencies.
+        type: number
+      MarketCapUSD:
+        description: Market capitalization in USD.
+        type: number
+      Mineable:
+        description: Mineable indicates if the currency is mineable.
+        type: boolean
+      Name:
+        description: Name of the currency.
+        type: string
+      Symbol:
+        description: Symbol of the currency.
+        type: string
+      Volume:
+        description: Volume is the total value of the currencies in USD which was traded in the last 24 hours.
+        type: number
+      price:
+        description: Cuurrent value of the currency.
+        type: number
+    type: object
+  models.ExchangeRate:
+    properties:
+      Rate:
+        description: Exchange rate.
+        type: number
+    type: object
+host: localhost:3001
+info:
+  contact:
+    email: tommychu2256@gmail.com
+    name: Tommy Chu
+  description: The Market Infor provides the latest data about commodities, currencies and cryptocurrencies.
+  license: {}
+  title: Market Info API
+  version: "1.0"
+paths:
+  /commodity/{name}:
+    get:
+      consumes:
+      - application/json
+      description: get commodity by name
+      operationId: get-commodity
+      parameters:
+      - description: Name of the commodity
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Commodity'
+        "400":
+          description: Bad Request
+          schema:
+            type: json
+      summary: returns the latest available commodity's data
+  /crypto/{name}:
+    get:
+      consumes:
+      - application/json
+      description: get cryptocurrency by name or symbol
+      operationId: get-cryptocurrency
+      parameters:
+      - description: Name of the commodity
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Crypto'
+        "400":
+          description: Bad Request
+          schema:
+            type: json
+      summary: returns the latest available cryptocurrency's data
+  /currency/{base}/{dest}:
+    post:
+      consumes:
+      - application/json
+      description: get exchange rate
+      operationId: get-rate
+      parameters:
+      - description: Name of the base currency
+        in: path
+        name: base
+        required: true
+        type: string
+      - description: Name of the destination currency
+        in: path
+        name: dest
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ExchangeRate'
+        "400":
+          description: Bad Request
+          schema:
+            type: json
+      summary: calculates the exchange rate of two currencies
+  /currency/{name}:
+    get:
+      consumes:
+      - application/json
+      description: get currency by name or symbol
+      operationId: get-currency
+      parameters:
+      - description: Name of the currency
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Crypto'
+        "400":
+          description: Bad Request
+          schema:
+            type: json
+      summary: returns the latest available currency's data
+schemes:
+- http
+swagger: "2.0"
